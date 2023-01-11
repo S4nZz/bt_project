@@ -1,36 +1,27 @@
 -- Make Library --
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/S4nZz/bt_project/main/Library/BT_Lib%20v1.5.lua"))()
 
--- Make Notification --
-Library:Notification("Title", "Description")
-
 -- Make Windows --
-local Windows = Library:CreateWindow("Title", "Game", "Default")
+local Windows = Library:CreateWindow("Hub", "Game", "Default")
 
 -- Make Tabs --
-local Tabs = Windows:addTab("Title", img)
+local Tabs = Windows:addTab("Tabs", img)
 
 -- Make Section --
-local Section = Tabs:addSection("Title")
+local Section = Tabs:addSection("Section")
 
 -- Make Element --
-local Element = Section:newSection("Title", false)
+local Element = Section:newSection("Element", false)
 
 -- Make Button --
-Element:addButton("Title", "Info", function()
+Element:addButton("Button", "Info", function()
     print(Button)
 end)
 
 -- Make Toggle --
-Element:addToggle("Title", "Info", Default, function(state)
+Element:addToggle("Toggle", "Info", Default, function(state)
     getgenv().Toggle = state
-    if getgenv().Toggle == true then
-        Default = true
-    elseif getgenv().Toggle == false then
-        Default = false
-    else
-        Default = false
-    end
+    print(state)
 end)
 
 
@@ -47,12 +38,12 @@ local newList = {
     }
 
 -- Make Dropdown --
-Element:addDropdown("Title", "Info", List, function(state)
-    Print(Dropdown)
+local Dropdown = Element:addDropdown("Dropdown", "Info", List, function(state)
+    print(state)
 end)
 
 -- Refresh Dropdown --
-local Dropdown = Element:addDropdown("Title", "Info", List, function(state)
+Element:addButton("Refresh Dropdown", "Info", function()
     Dropdown:Refresh(newList)
 end)
 
@@ -60,30 +51,29 @@ end)
 local minVal = 0
 local maxVal = 500
 local startVal = 50
-Element:addSlider("Title", "Info", minVal, maxVal, startVal, function(Value)
-    Print(Value)
+Element:addSlider("Slider", "Info", minVal, maxVal, startVal, function(Value)
+    print(Value)
 end)
 
 -- Make TextBox --
-Element:addTextBox("Title", "Info", function(state)
-    Print(State)
+Element:addTextBox("Textbox", "Info", function(state)
+    print(State)
 end)
 
 -- Make Keybind --
-Element:addKeybind("Title", "Info", Enum.KeyCode.F, function(state)
-    Print(state)
+Element:addKeybind("Keybind", "Info", Enum.KeyCode.F, function(state)
+    print(state)
 end)
 
 -- Make Label --
-Element:addLabel("Text Label")
+Element:addLabel("Label")
+
+-- Make Notification --
+Element:addButton("Notification", "Info", function()
+    Library:Notification("Title", "Text Description")
+end)
 
 -- Add Themes --
-for theme, color in pairs(themes) do
-    Element:addColor(theme, "Change your "..theme, color, function(color3)
-        Library:ChangeColor(theme, color3)
-    end)
-end
-
 local themes = {
     AccentColor = Color3.fromRGB(45, 45, 45),
     Background = Color3.fromRGB(30, 30, 30),
@@ -91,3 +81,9 @@ local themes = {
     ImageColor = Color3.fromRGB(255, 255, 255),
     ElementColor = Color3.fromRGB(12, 12, 12)
 }
+
+for theme, color in pairs(themes) do
+    Element:addColor(theme, "Change your "..theme, color, function(color3)
+        Library:ChangeColor(theme, color3)
+    end)
+end
