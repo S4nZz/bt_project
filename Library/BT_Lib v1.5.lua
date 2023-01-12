@@ -804,7 +804,7 @@ function Library:CreateWindow(title, gameName, themeList)
                 local cS = pageContainerList.AbsoluteContentSize
     
                 game.TweenService:Create(pageContainer, TweenInfo.new(0.15, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                    CanvasSize = UDim2.new(0,cS.X,0,cS.Y)
+                    CanvasSize = UDim2.new(0,0,0,cS.Y)
                 }):Play()
             end
             
