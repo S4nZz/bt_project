@@ -1137,10 +1137,10 @@ function Library:CreateWindow(title, gameName, themeList)
                             c:Destroy()
                         else
                             for i,v in next, infoContainer:GetChildren() do
-                                Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
+                                Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.05)
                                 focusing = false
                             end
-                            Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
+                            Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.05)
                         end
                     end)
                     local hovering = false
@@ -1528,7 +1528,7 @@ function Library:CreateWindow(title, gameName, themeList)
                                 c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
                                 for i = 1, 10 do
                                     c.ImageTransparency = c.ImageTransparency + 0.05
-                                    wait(len / 12)
+                                    
                                 end
                                 c:Destroy()
                             else
@@ -1546,7 +1546,7 @@ function Library:CreateWindow(title, gameName, themeList)
                                 c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
                                 for i = 1, 10 do
                                     c.ImageTransparency = c.ImageTransparency + 0.05
-                                    wait(len / 12)
+                                    
                                 end
                                 c:Destroy()
                             end
