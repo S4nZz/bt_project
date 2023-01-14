@@ -694,8 +694,8 @@ function Library:CreateWindow(title, gameName, themeList)
         tabImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         tabImage.BackgroundTransparency = 1.000
         tabImage.BorderSizePixel = 0
-        tabImage.Position = UDim2.new(0, 3, 0, 3)
-        tabImage.Size = UDim2.new(0, 21, 0, 22)
+        tabImage.Position = UDim2.new(0, 3, 0, 5)
+        tabImage.Size = UDim2.new(0, 18, 0, 18)
         tabImage.Image = tabimg
         tabImage.ImageColor3 = themeList.ImageColor
         Objects[tabImage] = "ImageColor3"
@@ -1119,22 +1119,6 @@ function Library:CreateWindow(title, gameName, themeList)
                     btn.MouseButton1Click:Connect(function()
                         if not focusing then
                             callback()
-                            local c = sample:Clone()
-                            c.Parent = btn
-                            local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
-                            c.Position = UDim2.new(0, x, 0, y)
-                            local len, size = 0.35, nil
-                            if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then
-                                size = (btn.AbsoluteSize.X * 1.5)
-                            else
-                                size = (btn.AbsoluteSize.Y * 1.5)
-                            end
-                            c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
-                            for i = 1, 10 do
-                                c.ImageTransparency = c.ImageTransparency + 0.05
-                                wait(len / 1)
-                            end
-                            c:Destroy()
                         else
                             for i,v in next, infoContainer:GetChildren() do
                                 Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.05)
@@ -1354,8 +1338,9 @@ function Library:CreateWindow(title, gameName, themeList)
                         else
                             callback(TextBox.Text)
                             wait(0.18)
-                            TextBox.Text = ""  
+                            TextBox.Text = "" or EnterPressed
                         end
+                        TextBox.Text = "" or EnterPressed
                     end)
     
                     viewInfo.MouseButton1Click:Connect(function()
@@ -1515,40 +1500,8 @@ function Library:CreateWindow(title, gameName, themeList)
                         if not focusing then
                             if toggled == false then
                                 img.ImageRectOffset = Vector2.new(4, 836)
-                                local c = sample:Clone()
-                                c.Parent = btn
-                                local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
-                                c.Position = UDim2.new(0, x, 0, y)
-                                local len, size = 0.35, nil
-                                if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then
-                                    size = (btn.AbsoluteSize.X * 1.5)
-                                else
-                                    size = (btn.AbsoluteSize.Y * 1.5)
-                                end
-                                c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
-                                for i = 1, 10 do
-                                    c.ImageTransparency = c.ImageTransparency + 0.05
-                                    wait(len / 1)
-                                end
-                                c:Destroy()
                             else
                                 img.ImageRectOffset = Vector2.new(940, 784)
-                                local c = sample:Clone()
-                                c.Parent = btn
-                                local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
-                                c.Position = UDim2.new(0, x, 0, y)
-                                local len, size = 0.35, nil
-                                if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then
-                                    size = (btn.AbsoluteSize.X * 1.5)
-                                else
-                                    size = (btn.AbsoluteSize.Y * 1.5)
-                                end
-                                c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
-                                for i = 1, 10 do
-                                    c.ImageTransparency = c.ImageTransparency + 0.05
-                                    wait(len / 1)
-                                end
-                                c:Destroy()
                             end
                             toggled = not toggled
                             pcall(callback, toggled)
@@ -1962,44 +1915,12 @@ function Library:CreateWindow(title, gameName, themeList)
                                 wait(0.1)
                                 updateSectionFrame()
                                 UpdateSize()
-                                local c = sample:Clone()
-                                c.Parent = btn
-                                local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
-                                c.Position = UDim2.new(0, x, 0, y)
-                                local len, size = 0.35, nil
-                                if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then
-                                    size = (btn.AbsoluteSize.X * 1.5)
-                                else
-                                    size = (btn.AbsoluteSize.Y * 1.5)
-                                end
-                                c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
-                                for i = 1, 10 do
-                                    c.ImageTransparency = c.ImageTransparency + 0.05
-                                    wait(len / 12)
-                                end
-                                c:Destroy()
                             else
                                 opened = true
                                 dropFrame:TweenSize(UDim2.new(1, 0, 0, UIListLayout.AbsoluteContentSize.Y), "InOut", "Linear", 0.08, true)
                                 wait(0.1)
                                 updateSectionFrame()
                                 UpdateSize()
-                                local c = sample:Clone()
-                                c.Parent = btn
-                                local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
-                                c.Position = UDim2.new(0, x, 0, y)
-                                local len, size = 0.35, nil
-                                if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then
-                                    size = (btn.AbsoluteSize.X * 1.5)
-                                else
-                                    size = (btn.AbsoluteSize.Y * 1.5)
-                                end
-                                c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
-                                for i = 1, 10 do
-                                    c.ImageTransparency = c.ImageTransparency + 0.05
-                                    wait(len / 12)
-                                end
-                                c:Destroy()
                             end
                         else
                             for i,v in next, infoContainer:GetChildren() do
@@ -2164,7 +2085,7 @@ function Library:CreateWindow(title, gameName, themeList)
                         Sample1.ImageTransparency = 0.600
     
                         local sample1 = Sample1
-                        DropYSize = DropYSize + 33
+                        DropYSize = DropYSize + 25
                         optionSelect.Name = "optionSelect"
                         optionSelect.Parent = dropFrame
                         optionSelect.BackgroundColor3 = themeList.ElementColor
@@ -2185,23 +2106,7 @@ function Library:CreateWindow(title, gameName, themeList)
                                 dropFrame:TweenSize(UDim2.new(1, 0, 0, 25), 'InOut', 'Linear', 0.08)
                                 wait(0.1)
                                 updateSectionFrame()
-                                UpdateSize()
-                                local c = sample1:Clone()
-                                c.Parent = optionSelect
-                                local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
-                                c.Position = UDim2.new(0, x, 0, y)
-                                local len, size = 0.35, nil
-                                if optionSelect.AbsoluteSize.X >= optionSelect.AbsoluteSize.Y then
-                                    size = (optionSelect.AbsoluteSize.X * 1.5)
-                                else
-                                    size = (optionSelect.AbsoluteSize.Y * 1.5)
-                                end
-                                c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
-                                for i = 1, 10 do
-                                    c.ImageTransparency = c.ImageTransparency + 0.05
-                                    wait(len / 12)
-                                end
-                                c:Destroy()         
+                                UpdateSize()         
                             else
                                 for i,v in next, infoContainer:GetChildren() do
                                     Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
@@ -2289,23 +2194,7 @@ function Library:CreateWindow(title, gameName, themeList)
                                     dropFrame:TweenSize(UDim2.new(1, 0, 0, 25), 'InOut', 'Linear', 0.08)
                                     wait(0.1)
                                     updateSectionFrame()
-                                    UpdateSize()
-                                    local c = sample11:Clone()
-                                    c.Parent = optionSelect
-                                    local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
-                                    c.Position = UDim2.new(0, x, 0, y)
-                                    local len, size = 0.35, nil
-                                    if optionSelect.AbsoluteSize.X >= optionSelect.AbsoluteSize.Y then
-                                        size = (optionSelect.AbsoluteSize.X * 1.5)
-                                    else
-                                        size = (optionSelect.AbsoluteSize.Y * 1.5)
-                                    end
-                                    c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
-                                    for i = 1, 10 do
-                                        c.ImageTransparency = c.ImageTransparency + 0.05
-                                        wait(len / 12)
-                                    end
-                                    c:Destroy()         
+                                    UpdateSize()         
                                 else
                                     for i,v in next, infoContainer:GetChildren() do
                                         Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
@@ -2397,21 +2286,6 @@ function Library:CreateWindow(title, gameName, themeList)
                             if a.KeyCode.Name ~= "Unknown" then
                                 togName_2.Text = a.KeyCode.Name
                                 oldKey = a.KeyCode.Name;
-                            end
-                            local c = sample:Clone()
-                            c.Parent = keybindElement
-                            local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
-                            c.Position = UDim2.new(0, x, 0, y)
-                            local len, size = 0.35, nil
-                            if keybindElement.AbsoluteSize.X >= keybindElement.AbsoluteSize.Y then
-                                size = (keybindElement.AbsoluteSize.X * 1.5)
-                            else
-                                size = (keybindElement.AbsoluteSize.Y * 1.5)
-                            end
-                            c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
-                            for i = 1, 10 do
-                            c.ImageTransparency = c.ImageTransparency + 0.05
-                                wait(len / 12)
                             end
                         else
                             for i,v in next, infoContainer:GetChildren() do
@@ -2637,44 +2511,12 @@ function Library:CreateWindow(title, gameName, themeList)
                                 wait(0.1)
                                 updateSectionFrame()
                                 UpdateSize()
-                                local c = sample:Clone()
-                                c.Parent = btn
-                                local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
-                                c.Position = UDim2.new(0, x, 0, y)
-                                local len, size = 0.35, nil
-                                if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then
-                                    size = (btn.AbsoluteSize.X * 1.5)
-                                else
-                                    size = (btn.AbsoluteSize.Y * 1.5)
-                                end
-                                c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
-                                for i = 1, 10 do
-                                    c.ImageTransparency = c.ImageTransparency + 0.05
-                                    wait(len / 12)
-                                end
-                                c:Destroy()
                             else
                                 colorOpened = true
                                 colorElement:TweenSize(UDim2.new(1, 0, 0, 141), "InOut", "Linear", 0.08, true)
                                 wait(0.1)
                                 updateSectionFrame()
                                 UpdateSize()
-                                local c = sample:Clone()
-                                c.Parent = btn
-                                local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
-                                c.Position = UDim2.new(0, x, 0, y)
-                                local len, size = 0.35, nil
-                                if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then
-                                    size = (btn.AbsoluteSize.X * 1.5)
-                                else
-                                    size = (btn.AbsoluteSize.Y * 1.5)
-                                end
-                                c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
-                                for i = 1, 10 do
-                                    c.ImageTransparency = c.ImageTransparency + 0.05
-                                    wait(len / 12)
-                                end
-                                c:Destroy()
                             end
                         else
                             for i,v in next, infoContainer:GetChildren() do
