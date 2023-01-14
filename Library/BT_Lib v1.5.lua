@@ -1132,7 +1132,7 @@ function Library:CreateWindow(title, gameName, themeList)
                             c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
                             for i = 1, 10 do
                                 c.ImageTransparency = c.ImageTransparency + 0.05
-                                wait(len / 12)
+                                wait(len / 1)
                             end
                             c:Destroy()
                         else
@@ -1528,7 +1528,7 @@ function Library:CreateWindow(title, gameName, themeList)
                                 c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
                                 for i = 1, 10 do
                                     c.ImageTransparency = c.ImageTransparency + 0.05
-                                    
+                                    wait(len / 1)
                                 end
                                 c:Destroy()
                             else
@@ -1546,7 +1546,7 @@ function Library:CreateWindow(title, gameName, themeList)
                                 c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
                                 for i = 1, 10 do
                                     c.ImageTransparency = c.ImageTransparency + 0.05
-                                    
+                                    wait(len / 1)
                                 end
                                 c:Destroy()
                             end
@@ -2237,7 +2237,7 @@ function Library:CreateWindow(title, gameName, themeList)
                                     optionSelect.BackgroundColor3 = themeList.ElementColor
                                 end
                                 optionSelect.TextColor3 = Color3.fromRGB(themeList.TextColor.r * 255 - 6, themeList.TextColor.g * 255 - 6, themeList.TextColor.b * 255 - 6)
-                                Sample1.ImageColor3 = themeList.SchemeColor
+                                Sample1.ImageColor3 = themeList.ImageColor
                             end
                         end)()
                     end
