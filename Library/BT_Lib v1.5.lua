@@ -1082,7 +1082,7 @@ function Library:CreateWindow(title, gameName, themeList)
                     touch.Size = UDim2.new(0, 17, 0, 17)
                     touch.Image = "rbxassetid://3926305904"
                     touch.ImageColor3 = themeList.ImageColor
-                    Objects[touch] = "SchemeColor"
+                    Objects[touch] = "ImageColor"
                     touch.ImageRectOffset = Vector2.new(84, 204)
                     touch.ImageRectSize = Vector2.new(36, 36)
                     touch.ImageTransparency = 0
@@ -2339,7 +2339,7 @@ function Library:CreateWindow(title, gameName, themeList)
                                         optionSelect.BackgroundColor3 = themeList.ElementColor
                                     end
                                     optionSelect.TextColor3 = Color3.fromRGB(themeList.TextColor.r * 255 - 6, themeList.TextColor.g * 255 - 6, themeList.TextColor.b * 255 - 6)
-                                    Sample11.ImageColor3 = themeList.SchemeColor
+                                    Sample11.ImageColor3 = themeList.ImageColor
                                 end
                             end)()
                         end
