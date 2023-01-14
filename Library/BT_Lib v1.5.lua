@@ -1200,9 +1200,10 @@ function Library:CreateWindow(title, gameName, themeList)
                     return ButtonFunction
                 end
 
-                function Elements:addTextBox(tname, tTip, callback)
+                function Elements:addTextBox(tname, tTip, tDefault, callback)
                     tname = tname or "Textbox"
                     tTip = tTip or "Gets a value of Textbox"
+		    tDefault = tDefault or "Type here"
                     callback = callback or function() end
                     local textboxElement = Instance.new("TextButton")
                     local UICorner = Instance.new("UICorner")
@@ -1260,7 +1261,7 @@ function Library:CreateWindow(title, gameName, themeList)
                     TextBox.ClearTextOnFocus = false
                     TextBox.Font = Enum.Font.SourceSans
                     TextBox.PlaceholderColor3 = Color3.fromRGB(themeList.TextColor.r * 255 - 19, themeList.TextColor.g * 255 - 26, themeList.TextColor.b * 255 - 35)
-                    TextBox.PlaceholderText = "Type here!"
+                    TextBox.PlaceholderText = tDefault or "Type here!"
                     TextBox.Text = ""
                     TextBox.TextColor3 = themeList.TextColor
                     TextBox.TextSize = 12.000
