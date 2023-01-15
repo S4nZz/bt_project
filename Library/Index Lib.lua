@@ -56,7 +56,8 @@ Element:addSlider("Slider", "Info", minVal, maxVal, startVal, function(Value)
 end)
 
 -- Make TextBox --
-Element:addTextBox("Textbox", "Info", function(state)
+Element:addTextBox("Textbox", "Info", Textbox, function(state)
+        Textbox = state
     print(State)
 end)
 
