@@ -1184,10 +1184,11 @@ function Library:CreateWindow(title, gameName, themeList)
                     return ButtonFunction
                 end
 
-                function Elements:addTextBox(tname, tTip, callback)
+                function Elements:addTextBox(tname, tTip, textbox, callback)
                     tname = tname or "Textbox"
                     tTip = tTip or "Gets a value of Textbox"
                     callback = callback or function() end
+
                     local textboxElement = Instance.new("TextButton")
                     local UICorner = Instance.new("UICorner")
                     local viewInfo = Instance.new("ImageButton")
@@ -1244,7 +1245,7 @@ function Library:CreateWindow(title, gameName, themeList)
                     TextBox.ClearTextOnFocus = false
                     TextBox.Font = Enum.Font.SourceSans
                     TextBox.PlaceholderColor3 = Color3.fromRGB(themeList.TextColor.r * 255 - 19, themeList.TextColor.g * 255 - 26, themeList.TextColor.b * 255 - 35)
-                    TextBox.PlaceholderText = "Type here!"
+                    TextBox.PlaceholderText = textbox or "Type here!"
                     TextBox.Text = ""
                     TextBox.TextColor3 = themeList.TextColor
                     TextBox.TextSize = 12.000
@@ -1334,13 +1335,11 @@ function Library:CreateWindow(title, gameName, themeList)
                             Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
                         end
                         if not EnterPressed then 
-                            return
-                        else
                             callback(TextBox.Text)
-                            wait(0.18)
-                            TextBox.Text = "" or EnterPressed
+                            wait(0.15)
+                            return
                         end
-                        TextBox.Text = "" or EnterPressed
+                        TextBox.Text = textbox
                     end)
     
                     viewInfo.MouseButton1Click:Connect(function()
