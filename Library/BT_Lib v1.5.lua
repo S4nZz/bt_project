@@ -1339,7 +1339,6 @@ function Library:CreateWindow(title, gameName, themeList)
                             wait(0.15)
                             return
                         end
-                        TextBox.Text = textbox
                     end)
     
                     viewInfo.MouseButton1Click:Connect(function()
