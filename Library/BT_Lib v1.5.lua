@@ -1187,6 +1187,7 @@ function Library:CreateWindow(title, gameName, themeList)
                 function Elements:addTextBox(tname, tTip, textbox, callback)
                     tname = tname or "Textbox"
                     tTip = tTip or "Gets a value of Textbox"
+		    textbox = textbox or "Enter text"
                     callback = callback or function() end
 
                     local textboxElement = Instance.new("TextButton")
@@ -1339,6 +1340,7 @@ function Library:CreateWindow(title, gameName, themeList)
                             wait(0.15)
                             return
                         end
+			TextBox.Text = textbox
                     end)
     
                     viewInfo.MouseButton1Click:Connect(function()
