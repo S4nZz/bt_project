@@ -1326,7 +1326,7 @@ function Library:CreateWindow(title, gameName, themeList)
                         end
                     end)
     
-                    TextBox.FocusLost:Connect(function(EnterPressed)
+                    TextBox.FocusLost:Connect(function()
                         if not EnterPressed then 
                             callback(TextBox.Text)
                             return
@@ -2882,7 +2882,7 @@ function Library:CreateWindow(title, gameName, themeList)
                     setcolor({h,s,v})
                 end
                 
-                function Elements:addLogcat(textlog)
+                function Elements:addLog(textlog)
                     local logcatfunc = {}
                     textlog = textlog or "Log"
                     local Title = Instance.new("TextLabel")
@@ -2930,7 +2930,7 @@ function Library:CreateWindow(title, gameName, themeList)
                     TextLabel.Font = Enum.Font.Code
                     TextLabel.TextColor3 = themeList.TextColor
                     TextLabel.TextSize = 12.000
-                    TextLabel.Text = "  • "..textlog
+                    TextLabel.Text = "# "..textlog
                     TextLabel.TextXAlignment = Enum.TextXAlignment.Left
                     TextLabel.TextYAlignment = Enum.TextYAlignment.Top
                     
@@ -2942,8 +2942,8 @@ function Library:CreateWindow(title, gameName, themeList)
                         TextLabel.TextColor3 = themeList.TextColor
                     end)()
                     
-                    function logcatfunc:Set(newLog)
-                        TextLabel.Text = "  • "..newLog
+                    function logcatfunc:Refresh(newLog)
+                        TextLabel.Text = "# "..newLog
                     end
                     return logcatfunc
                 end
