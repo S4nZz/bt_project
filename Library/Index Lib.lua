@@ -56,9 +56,9 @@ Element:addSlider("Slider", "Info", minVal, maxVal, startVal, function(Value)
 end)
 
 -- Make TextBox --
-Element:addTextBox("Textbox", "Info", Textbox, function(state)
-        Textbox = state
-    print(State)
+Element:addTextBox("Textbox", "Info", "Textbox Text", function(state)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = state
+    print(state)
 end)
 
 -- Make Keybind --
@@ -68,6 +68,11 @@ end)
 
 -- Make Label --
 Element:addLabel("Label")
+
+-- Make Log --
+Element:addLog("Text Log") --:Refresh(newLog)
+
+
 
 -- Make Notification --
 Element:addButton("Notification", "Info", function()
