@@ -2949,8 +2949,8 @@ function Library:CreateWindow(title, gameName, themeList)
 		    updateSectionFrame()
                     UpdateSize()
                     function logcatfunc:Refresh(newLog)
-                        if TextLabel.Text ~= newLog.Frame then
-			    TextLabel.Text = newLog.Frame
+                        if TextLabel.Text ~= newLog then
+			    TextLabel.Text = newLog
 			end
                     end
                     return logcatfunc
