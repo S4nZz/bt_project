@@ -1188,6 +1188,7 @@ function Library:CreateWindow(title, gameName, themeList)
                     tname = tname or "Textbox"
                     tTip = tTip or "Gets a value of Textbox"
                     callback = callback or function() end
+                    textbox = textbox or 'Type Here'
 
                     local textboxElement = Instance.new("TextButton")
                     local UICorner = Instance.new("UICorner")
@@ -1242,8 +1243,7 @@ function Library:CreateWindow(title, gameName, themeList)
                     TextBox.Position = UDim2.new(0, 226, 0, 3)
                     TextBox.Size = UDim2.new(0, 150, 0, 19)
                     TextBox.ZIndex = 99
-                    TextBox.ClearTextOnFocus = false
-                    TextBox.Font = Enum.Font.SourceSans
+                    TextBox.Font = Enum.Font.Code
                     TextBox.PlaceholderColor3 = Color3.fromRGB(themeList.TextColor.r * 255 - 19, themeList.TextColor.g * 255 - 26, themeList.TextColor.b * 255 - 35)
                     TextBox.PlaceholderText = textbox or "Type here!"
                     TextBox.Text = ""
@@ -1327,6 +1327,11 @@ function Library:CreateWindow(title, gameName, themeList)
                     end)
     
                     TextBox.FocusLost:Connect(function(EnterPressed)
+                        if not EnterPressed then 
+                            callback(TextBox.Text)
+                            return
+                        end
+                        TextBox.Text = textbox
                         if focusing then
                             for i,v in next, infoContainer:GetChildren() do
                                 Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
@@ -1334,12 +1339,6 @@ function Library:CreateWindow(title, gameName, themeList)
                             end
                             Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
                         end
-                        if not EnterPressed then 
-                            callback(TextBox.Text)
-                            wait(0.15)
-                            return
-                        end
-                        TextBox.Text = textbox
                     end)
     
                     viewInfo.MouseButton1Click:Connect(function()
@@ -2881,6 +2880,72 @@ function Library:CreateWindow(title, gameName, themeList)
                         end
                     end)
                     setcolor({h,s,v})
+                end
+                
+                function Elements:addLogcat(textlog)
+                    local logcatfunc = {}
+                    textlog = textlog or "Log"
+                    local Title = Instance.new("TextLabel")
+                    local titleCorner = Instance.new("UICorner")
+                    local Frame = Instance.new("ScrollingFrame")
+                    local UIListLayout = Instance.new("UIListLayout")
+                    local UICorner = Instance.new("UICorner")
+                    local TextLabel = Instance.new("TextLabel")
+                    
+                    Title.Name = "Title"
+                    Title.Parent = sectionInners
+                    Title.BackgroundColor3 = themeList.AccentColor
+                    Title.BorderSizePixel = 0
+                    Title.Size = UDim2.new(1, 0, 0, 15)
+                    Title.Font = Enum.Font.SourceSansBold
+                    Title.Text = "• Console Log •"
+                    Title.TextColor3 = themeList.TextColor
+                    Title.TextSize = 14.000
+                    Title.TextXAlignment = Enum.TextXAlignment.Center
+                    
+                    titleCorner.Parent = Title
+                    titleCorner.CornerRadius = UDim.new(0, 4)
+                    
+                    Frame.Name = "Frame"
+                    Frame.Parent = sectionInners
+                    Frame.BackgroundColor3 = themeList.ElementColor
+                    Frame.Size = UDim2.new(1, 0, 0, 50)
+                    Frame.ClipsDescendants = true
+                    Frame.Active = true
+                    Frame.ScrollBarThickness = 3
+                    Frame.ScrollBarImageColor3 = themeList.AccentColor
+                    
+                    UICorner.Parent = Frame
+                    UICorner.CornerRadius = UDim.new(0, 4)
+                    
+                    UIListLayout.Parent = Frame
+                    UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+                    UIListLayout.Padding = UDim.new(0, 3)
+                    
+                    TextLabel.Parent = Frame
+                    TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                    TextLabel.BackgroundTransparency = 1.000
+                    TextLabel.BorderSizePixel = 0
+                    TextLabel.Size = UDim2.new(1, 0, 0, 15)
+                    TextLabel.Font = Enum.Font.Code
+                    TextLabel.TextColor3 = themeList.TextColor
+                    TextLabel.TextSize = 12.000
+                    TextLabel.Text = "  • "..textlog
+                    TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+                    TextLabel.TextYAlignment = Enum.TextYAlignment.Top
+                    
+                    coroutine.wrap(function()
+                        Title.BackgroundColor3 = themeList.AccentColor
+                        Title.TextColor3 = themeList.TextColor
+                        Frame.BackgroundColor3 = themeList.ElementColor
+                        Frame.ScrollBarImageColor3 = themeList.AccentColor
+                        TextLabel.TextColor3 = themeList.TextColor
+                    end)()
+                    
+                    function logcatfunc:Set(newLog)
+                        TextLabel.Text = "  • "..newLog
+                    end
+                    return logcatfunc
                 end
 
                 function Elements:addLabel(title)
