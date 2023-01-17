@@ -2884,11 +2884,10 @@ function Library:CreateWindow(title, gameName, themeList)
                 
                 function Elements:addLog(textlog)
                     local logcatfunc = {}
-                    textlog = textlog or "Log"
+                    textlog = textlog.Frame or "Log"
                     local Title = Instance.new("TextLabel")
                     local titleCorner = Instance.new("UICorner")
                     local Frame = Instance.new("ScrollingFrame")
-                    local UIListLayout = Instance.new("UIListLayout")
                     local UICorner = Instance.new("UICorner")
                     local TextLabel = Instance.new("TextLabel")
                     
@@ -2914,30 +2913,30 @@ function Library:CreateWindow(title, gameName, themeList)
                     Frame.Active = true
                     Frame.ScrollBarThickness = 8
                     Frame.ScrollBarImageColor3 = themeList.AccentColor
+		    Frame.CanvasSize = UDim2.new(0, 0, 0, string.len(TextLabel.Text))
                     
                     UICorner.Parent = Frame
                     UICorner.CornerRadius = UDim.new(0, 4)
-                    
-                    UIListLayout.Parent = Frame
-                    UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-                    UIListLayout.Padding = UDim.new(0, 3)
-
-		    Frame.CanvasSize = UDim2.new(0, 0, 0, 0 + UIListLayout.AbsoluteContentSize.Y)
-    		    UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-        		Frame.CanvasSize = UDim2.new(0, 0, 0, 0 + UIListLayout.AbsoluteContentSize.Y)
-    		    end)
                     
                     TextLabel.Parent = Frame
                     TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
                     TextLabel.BackgroundTransparency = 1.000
                     TextLabel.BorderSizePixel = 0
-                    TextLabel.Size = UDim2.new(1, -10, 0, 15)
+		    TextLabel.Position = UDim2.new(0, 3, 0, 0)
+                    TextLabel.Size = UDim2.new(1, -10, 0, string.len(TextLabel.Text))
                     TextLabel.Font = Enum.Font.Code
                     TextLabel.TextColor3 = themeList.TextColor
                     TextLabel.TextSize = 12.000
-                    TextLabel.Text = "  "..textlog
+                    TextLabel.Text = textlog.Frame
+		    TextLabel.TextScaled = false
+		    TextLabel.TextWrapped = true
                     TextLabel.TextXAlignment = Enum.TextXAlignment.Left
                     TextLabel.TextYAlignment = Enum.TextYAlignment.Top
+					
+		    TextLabel:GetPropertyChangedSignal("Text"):Connect(function()
+			Frame.CanvasSize = UDim2.new(0, 0, 0, string.len(TextLabel.Text))
+			TextLabel.Size = UDim2.new(1, -10, 0, string.len(TextLabel.Text))
+		    end)
                     
                     coroutine.wrap(function()
                         Title.BackgroundColor3 = themeList.AccentColor
@@ -2948,7 +2947,7 @@ function Library:CreateWindow(title, gameName, themeList)
                     end)()
                     
                     function logcatfunc:Refresh(newLog)
-                        TextLabel.Text = "  "..newLog
+                        TextLabel.Text = newLog.Frame
                     end
                     return logcatfunc
                 end
