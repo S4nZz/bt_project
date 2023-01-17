@@ -2922,9 +2922,9 @@ function Library:CreateWindow(title, gameName, themeList)
                     UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
                     UIListLayout.Padding = UDim.new(0, 3)
 
-		    Frame.CanvasSize = UDim2.new(0, 0, 0, UIListLayout.AbsoluteContentSize.Y)
+		    Frame.CanvasSize = UDim2.new(0, 0, 0, 0 + UIListLayout.AbsoluteContentSize.Y)
     		    UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-        		Frame.CanvasSize = UDim2.new(0, 0, 0, UIListLayout.AbsoluteContentSize.Y)
+        		Frame.CanvasSize = UDim2.new(0, 0, 0, 0 + UIListLayout.AbsoluteContentSize.Y)
     		    end)
                     
                     TextLabel.Parent = Frame
@@ -2932,11 +2932,10 @@ function Library:CreateWindow(title, gameName, themeList)
                     TextLabel.BackgroundTransparency = 1.000
                     TextLabel.BorderSizePixel = 0
                     TextLabel.Size = UDim2.new(1, -10, 0, 15)
-		    TextLabel.Position = UDim2.new(0, 3, 0, 0)
                     TextLabel.Font = Enum.Font.Code
                     TextLabel.TextColor3 = themeList.TextColor
                     TextLabel.TextSize = 12.000
-                    TextLabel.Text = "# "..textlog
+                    TextLabel.Text = "  "..textlog
                     TextLabel.TextXAlignment = Enum.TextXAlignment.Left
                     TextLabel.TextYAlignment = Enum.TextYAlignment.Top
                     
@@ -2949,7 +2948,7 @@ function Library:CreateWindow(title, gameName, themeList)
                     end)()
                     
                     function logcatfunc:Refresh(newLog)
-                        TextLabel.Text = "# "..newLog
+                        TextLabel.Text = "  "..newLog
                     end
                     return logcatfunc
                 end
