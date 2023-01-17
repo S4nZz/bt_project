@@ -2909,10 +2909,10 @@ function Library:CreateWindow(title, gameName, themeList)
                     Frame.Name = "Frame"
                     Frame.Parent = sectionInners
                     Frame.BackgroundColor3 = themeList.ElementColor
-                    Frame.Size = UDim2.new(1, 0, 0, 50)
+                    Frame.Size = UDim2.new(1, 0, 0, 150)
                     Frame.ClipsDescendants = true
                     Frame.Active = true
-                    Frame.ScrollBarThickness = 3
+                    Frame.ScrollBarThickness = 8
                     Frame.ScrollBarImageColor3 = themeList.AccentColor
                     
                     UICorner.Parent = Frame
@@ -2921,12 +2921,18 @@ function Library:CreateWindow(title, gameName, themeList)
                     UIListLayout.Parent = Frame
                     UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
                     UIListLayout.Padding = UDim.new(0, 3)
+
+		    Frame.CanvasSize = UDim2.new(0, 0, 0, UIListLayout.AbsoluteContentSize.Y)
+    		    UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+        		Frame.CanvasSize = UDim2.new(0, 0, 0, UIListLayout.AbsoluteContentSize.Y)
+    		    end)
                     
                     TextLabel.Parent = Frame
                     TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
                     TextLabel.BackgroundTransparency = 1.000
                     TextLabel.BorderSizePixel = 0
-                    TextLabel.Size = UDim2.new(1, 0, 0, 15)
+                    TextLabel.Size = UDim2.new(1, -10, 0, 15)
+		    TextLabel.Position = UDim2.new(0, 3, 0, 0)
                     TextLabel.Font = Enum.Font.Code
                     TextLabel.TextColor3 = themeList.TextColor
                     TextLabel.TextSize = 12.000
