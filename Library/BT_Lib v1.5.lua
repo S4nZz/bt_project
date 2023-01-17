@@ -2927,7 +2927,7 @@ function Library:CreateWindow(title, gameName, themeList)
                     TextLabel.Font = Enum.Font.Code
                     TextLabel.TextColor3 = themeList.TextColor
                     TextLabel.TextSize = 12.000
-                    TextLabel.Text = textlog
+                    TextLabel.Text = textlog.Frame
 		    TextLabel.TextScaled = false
 		    TextLabel.TextWrapped = true
                     TextLabel.TextXAlignment = Enum.TextXAlignment.Left
@@ -2946,8 +2946,12 @@ function Library:CreateWindow(title, gameName, themeList)
                         TextLabel.TextColor3 = themeList.TextColor
                     end)()
                     
+		    updateSectionFrame()
+                    UpdateSize()
                     function logcatfunc:Refresh(newLog)
-                        TextLabel.Text = newLog
+                        if TextLabel.Text ~= newLog.Frame then
+			    TextLabel.Text = newLog.Frame
+			end
                     end
                     return logcatfunc
                 end
