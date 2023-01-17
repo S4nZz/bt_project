@@ -2884,7 +2884,7 @@ function Library:CreateWindow(title, gameName, themeList)
                 
                 function Elements:addLog(textlog)
                     local logcatfunc = {}
-                    textlog = textlog.Frame or "Log"
+                    
                     local Title = Instance.new("TextLabel")
                     local titleCorner = Instance.new("UICorner")
                     local Frame = Instance.new("ScrollingFrame")
