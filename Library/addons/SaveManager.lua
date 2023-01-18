@@ -1,3 +1,6 @@
+
+--skidded from 'https://raw.githubusercontent.com/wally-rblx/LinoriaLib/main/addons/SaveManager.lua'
+
 local httpService = game:GetService('HttpService')
 
 local SaveManager = {} do
@@ -104,7 +107,7 @@ local SaveManager = {} do
 
 	function SaveManager:IgnoreThemeSettings()
 		self:SetIgnoreIndexes({ 
-			"BackgroundColor", "MainColor", "AccentColor", "OutlineColor", "FontColor", -- themes
+			"Background", "ElementColor", "AccentColor", "TextColor", "ImageColor", -- themes
 			"ThemeManager_ThemeList", 'ThemeManager_CustomThemeList', 'ThemeManager_CustomThemeName', -- themes
 		})
 	end
@@ -171,15 +174,15 @@ local SaveManager = {} do
 
 	function SaveManager:BuildConfigSection(tab)
 		assert(self.Library, 'Must set SaveManager.Library')
-		local element = tab:addSection("Configuration")
-		local section = element:newSection("Configuration Settings", false)
+		local element = tab:addSection("Setting's")
+		local section = element:newSection("Setting's Manager", true)
 		
-		local ConfigList = section:addDropdown('SaveManager_ConfigList', 'Config list', 'Info', '', self:RefreshConfigList())
-		section:addTextBox('SaveManager_ConfigName', 'Config name')
+		local ConfigList = section:addDropdown('SaveManager_ConfigList', 'Config List', 'List your config', '', self:RefreshConfigList())
+		section:addTextBox('SaveManager_ConfigName', 'Rename config')
 
 		--section:AddDivider()
 
-		section:addButton('Create config', 'Info', function()
+		section:addButton('Save config', 'Info', function()
 			local name = Options.SaveManager_ConfigName.Value
 
 			if name:gsub(' ', '') == '' then 
@@ -234,11 +237,11 @@ local SaveManager = {} do
 			Options.SaveManager_ConfigList:SetValue(nil)
 		end)
 
-		SaveManager.AutoloadLabel = section:addLabel('Current autoload config: none')
+		SaveManager.AutoloadLabel = section:addLabel('• Current autoload config : none')
 
 		if isfile(self.Folder .. '/settings/autoload.txt') then
 			local name = readfile(self.Folder .. '/settings/autoload.txt')
-			SaveManager.AutoloadLabel:UpdateLabel('Current autoload config: ' .. name)
+			SaveManager.AutoloadLabel:UpdateLabel('• Current autoload config : ' .. name)
 		end
 
 		SaveManager:SetIgnoreIndexes({ 'SaveManager_ConfigList', 'SaveManager_ConfigName' })
