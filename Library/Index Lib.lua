@@ -1,8 +1,8 @@
 -- Make Library --
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/jmesfo0/bt_project/main/Library/BT_Lib%20v1.5.lua"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/S4nZz/bt_project/main/Library/BT_Lib%20v1.5.lua"))()
 
  -- Make Save Manager --
-local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/jmesfo0/bt_project/main/Library/addons/SaveManager.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/S4nZz/bt_project/main/Library/addons/SaveManager.lua"))()
 
 -- Make Tables --
 local List = {
@@ -47,14 +47,14 @@ Element:addButton("Button", "Info", function()
 end)
 
 -- Make Toggle --
-Element:addToggle("Toggle1", "Toggle", "Info", Default, function(state)
+Element:addToggle("Toggle1", "Title", "Info", Default, function(state)
     getgenv().Toggle = state
     print(state)
 end)
 
 
 -- Make Dropdown --
-local Dropdown = Element:addDropdown("Dropdown1", "Dropdown", "Info", "Default", List, function(state)
+local Dropdown = Element:addDropdown("Dropdown1", "Title", "Info", "Default", List, function(state)
     print(state)
 end)
 
@@ -64,22 +64,22 @@ Element:addButton("Refresh Dropdown", "Info", function()
 end)
 
 -- Make Slider --
-Element:addSlider("Slider1", "Slider", "Info", 0, 500, 50, function(Value)
+Element:addSlider("Slider1", "Title", "Info", 0, 500, 50, function(Value)
     print(Value)
 end)
 
 -- Make TextBox --
-Element:addTextBox("Textbox1", "Textbox", "Info", "Textbox Text", function(Value)
+Element:addTextBox("Textbox1", "Title", "Info", "Placeholder Title", function(Value)
     print(Value)
 end)
 
 -- Make Keybind --
-Element:addKeybind("Keybind", "Info", Enum.KeyCode.F, function(Value)
+Element:addKeybind("Title", "Info", Enum.KeyCode.F, function(Value)
     print(Value)
 end)
 
 -- Make Label --
-Element:addLabel("Label")
+Element:addLabel("Text Label")
 
 -- Make Log --
 local Log = Element:addLog(table.concat(TempTable, "\n"))
