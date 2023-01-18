@@ -1,5 +1,33 @@
 -- Make Library --
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/S4nZz/bt_project/main/Library/BT_Lib%20v1.5.lua"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/jmesfo0/bt_project/main/Library/BT_Lib%20v1.5.lua"))()
+
+ -- Make Save Manager --
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/jmesfo0/bt_project/main/Library/addons/SaveManager.lua"))()
+
+-- Make Tables --
+local List = {
+    "Dropdown 1";
+    "Dropdown 2";
+    "Dropdown 3";
+    }
+
+local newList = {
+    "newDropdown 1";
+    "newDropdown 2";
+    "newDropdown 3";
+    }
+
+local TempTable = {}
+
+for i=1,100 do
+  table.insert(TempTable, i..". Text Entry")
+end
+
+local newTable = {}
+
+for i=1,100 do
+  table.insert(newTable, i..". New Text Entry")
+end
 
 -- Make Windows --
 local Windows = Library:CreateWindow("Hub", "Game", "Default")
@@ -19,26 +47,14 @@ Element:addButton("Button", "Info", function()
 end)
 
 -- Make Toggle --
-Element:addToggle("Toggle", "Info", Default, function(state)
+Element:addToggle("Toggle1", "Toggle", "Info", Default, function(state)
     getgenv().Toggle = state
     print(state)
 end)
 
 
-local List = {
-    "Dropdown 1";
-    "Dropdown 2";
-    "Dropdown 3";
-    }
-
-local newList = {
-    "newDropdown 1";
-    "newDropdown 2";
-    "newDropdown 3";
-    }
-
 -- Make Dropdown --
-local Dropdown = Element:addDropdown("Dropdown", "Info", List, function(state)
+local Dropdown = Element:addDropdown("Dropdown1", "Dropdown", "Info", "Default", List, function(state)
     print(state)
 end)
 
@@ -48,31 +64,32 @@ Element:addButton("Refresh Dropdown", "Info", function()
 end)
 
 -- Make Slider --
-local minVal = 0
-local maxVal = 500
-local startVal = 50
-Element:addSlider("Slider", "Info", minVal, maxVal, startVal, function(Value)
+Element:addSlider("Slider1", "Slider", "Info", 0, 500, 50, function(Value)
     print(Value)
 end)
 
 -- Make TextBox --
-Element:addTextBox("Textbox", "Info", "Textbox Text", function(state)
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = state
-    print(state)
+Element:addTextBox("Textbox1", "Textbox", "Info", "Textbox Text", function(Value)
+    print(Value)
 end)
 
 -- Make Keybind --
-Element:addKeybind("Keybind", "Info", Enum.KeyCode.F, function(state)
-    print(state)
+Element:addKeybind("Keybind", "Info", Enum.KeyCode.F, function(Value)
+    print(Value)
 end)
 
 -- Make Label --
 Element:addLabel("Label")
 
 -- Make Log --
-Element:addLog("Text Log") --:Refresh(newLog)
+local Log = Element:addLog(table.concat(TempTable, "\n"))
 
+--Log:Refresh()
 
+-- Refresh Log --
+Element:addButton("Refresh Log", "info", function() 
+  Log:Refresh(table.concat(newTable, "\n"))
+end)
 
 -- Make Notification --
 Element:addButton("Notification", "Info", function()
@@ -93,3 +110,12 @@ for theme, color in pairs(themes) do
         Library:ChangeColor(theme, color3)
     end)
 end
+
+SaveManager:SetLibrary(Library)
+
+SaveManager:SetFolder('BlackTrap/psx')
+
+-- Builds our config menu on the right side of our tab
+SaveManager:BuildConfigSection(Tabs) 
+
+SaveManager:LoadAutoloadConfig()

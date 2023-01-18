@@ -13,6 +13,19 @@ local inout = Enum.EasingDirection.InOut
 
 local Utility = {}
 local Objects = {}
+
+local Toggles = {};
+local Options = {};
+
+getgenv().Toggles = Toggles;
+getgenv().Options = Options;
+
+function Library:AttemptSave()
+    if Library.SaveManager then
+        Library.SaveManager:Save();
+    end;
+end;
+
 function Library:DraggingEnabled(frame, parent)
     local dragging = nil
     local dragInput = nil
@@ -1184,11 +1197,15 @@ function Library:CreateWindow(title, gameName, themeList)
                     return ButtonFunction
                 end
 
-                function Elements:addTextBox(tname, tTip, textbox, callback)
+                function Elements:addTextBox(Idx, tname, tTip, textbox, callback)
+					local Textbox = {
+						Value = textbox;
+						Type = 'Textbox';
+					};
                     tname = tname or "Textbox"
                     tTip = tTip or "Gets a value of Textbox"
                     callback = callback or function() end
-                    textbox = textbox or 'Type Here'
+                    textbox = Textbox.Value or 'Type Here'
 
                     local textboxElement = Instance.new("TextButton")
                     local UICorner = Instance.new("UICorner")
@@ -1329,9 +1346,11 @@ function Library:CreateWindow(title, gameName, themeList)
                     TextBox.FocusLost:Connect(function()
                         if not EnterPressed then 
                             callback(TextBox.Text)
+							Textbox.Value = TextBox.Text
                             return
                         end
                         TextBox.Text = textbox
+						Textbox.Value = TextBox.Text
                         if focusing then
                             for i,v in next, infoContainer:GetChildren() do
                                 Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
@@ -1376,9 +1395,21 @@ function Library:CreateWindow(title, gameName, themeList)
                             TextBox.TextColor3 = themeList.TextColor
                         end
                     end)()
+					
+					function Textbox:SetValue(Text)
+						TextBox.PlaceholderText = Text;
+						TextBox.Text = Text;
+						Textbox.Value = TextBox.Text;
+					end;
+					
+					Options[Idx] = Textbox;
                 end
 
-                function Elements:addToggle(tname, nTip, default, callback)
+                function Elements:addToggle(Idx, tname, nTip, default, callback)
+					local Toggle = {
+						Value = default or false;
+						Type = 'Toggle';
+					};
                     local TogFunction = {}
                     tname = tname or "Toggle"
                     nTip = nTip or "Prints Current Toggle State"
@@ -1491,6 +1522,7 @@ function Library:CreateWindow(title, gameName, themeList)
                     if default == true then
                         img.ImageRectOffset = Vector2.new(4, 836)
                         toggled = not toggled
+						Toggle.Value = default
                         pcall(callback, toggled)
                     end
 
@@ -1502,6 +1534,7 @@ function Library:CreateWindow(title, gameName, themeList)
                                 img.ImageRectOffset = Vector2.new(940, 784)
                             end
                             toggled = not toggled
+							Toggle.Value = toggled
                             pcall(callback, toggled)
                         else
                             for i,v in next, infoContainer:GetChildren() do
@@ -1562,25 +1595,50 @@ function Library:CreateWindow(title, gameName, themeList)
                             viewDe = false
                         end
                     end)
-                    function TogFunction:UpdateToggle(newText, isTogOn)
+					
+
+                    function TogFunction:UpdateToggle(isTogOn)
                         isTogOn = isTogOn or toggle
-                        if newText ~= nil then 
-                            togName.Text = newText
-                        end
                         if isTogOn then
                             toggled = true
+							Toggle.Value = toggled;
                             img.ImageRectOffset = Vector2.new(4, 836)
                             pcall(callback, toggled)
                         else
                             toggled = false
+							Toggle.Value = toggled;
                             img.ImageRectOffset = Vector2.new(940, 784)
                             pcall(callback, toggled)
                         end
                     end
+					
+					function Toggle:SetValue(Bool)
+                        Bool = Bool or toggle
+                        if Bool then
+                            toggled = true
+							Toggle.Value = toggled;
+                            img.ImageRectOffset = Vector2.new(4, 836)
+                            pcall(callback, toggled)
+                        else
+                            toggled = false
+							Toggle.Value = toggled;
+                            img.ImageRectOffset = Vector2.new(940, 784)
+                            pcall(callback, toggled)
+                        end
+					end;	
+					
+					Toggles[Idx] = Toggle;
+					
                     return TogFunction
                 end
 
-                function Elements:addSlider(slidInf, slidTip, minvalue, maxvalue, startVal, callback)
+                function Elements:addSlider(Idx, slidInf, slidTip, minvalue, maxvalue, startVal, callback)
+					local Slider = {
+						Value = startVal;
+						Min = minvalue;
+						Max = maxvalue;
+						Type = 'Slider';
+					};
                     slidInf = slidInf or "Slider"
                     slidTip = slidTip or "Slider tip here"
                     maxvalue = maxvalue
@@ -1775,6 +1833,7 @@ function Library:CreateWindow(title, gameName, themeList)
                             Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 380) * sliderDrag.AbsoluteSize.X) + tonumber(minvalue)) or 0
                             pcall(function()
                                 callback(Value)
+								Slider.Value = Value
                             end)
                             Utility:TweenObject(sliderDrag, {Size = UDim2.new(0, math.clamp(mouse.X - sliderDrag.AbsolutePosition.X, 0, 380), 0, 6)}, 0.05)
                             Utility:TweenObject(Circle, {Position = UDim2.new(0, math.clamp(mouse.X - sliderDrag.AbsolutePosition.X - 2, 0, 380), 0, -1)}, 0.05)
@@ -1786,6 +1845,7 @@ function Library:CreateWindow(title, gameName, themeList)
                                 Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 380) * sliderDrag.AbsoluteSize.X) + tonumber(minvalue)) or 0
                                 pcall(function()
                                     callback(Value)
+									Slider.Value = Value
                                 end)
                                 Utility:TweenObject(sliderDrag, {Size = UDim2.new(0, math.clamp(mouse.X - sliderDrag.AbsolutePosition.X, 0, 380), 0, 6)}, 0.05)
                                 Utility:TweenObject(Circle, {Position = UDim2.new(0, math.clamp(mouse.X - sliderDrag.AbsolutePosition.X - 2, 0, 380), 0, -1)}, 0.05)
@@ -1798,6 +1858,7 @@ function Library:CreateWindow(title, gameName, themeList)
                                     Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 380) * sliderDrag.AbsoluteSize.X) + tonumber(minvalue)) or 0
                                     pcall(function()
                                         callback(Value)
+										Slider.Value = Value
                                     end)
                                     togName.Text = slidInf.." - "..Value
                                     Utility:TweenObject(sliderDrag, {Size = UDim2.new(0, math.clamp(mouse.X - sliderDrag.AbsolutePosition.X, 0, 380), 0, 6)}, 0.05)
@@ -1853,12 +1914,33 @@ function Library:CreateWindow(title, gameName, themeList)
                             wait(0)
                             viewDe = false
                         end
-                    end)        
+                    end)
+					function Slider:SetValue(Str)
+						local Num = tonumber(Str);
+
+						if (not Num) then
+							return;
+						end;
+
+						Num = math.clamp(Num, minvalue, maxvalue);
+
+						
+						Value = Num
+						Slider.Value = Num;
+						
+					end;
+					Options[Idx] = Slider;
                 end
 
-                function Elements:addDropdown(dropname, dropinf, list, callback)
+                function Elements:addDropdown(Idx, dropname, dropinf, default, list, callback)
+					local Dropdown = {
+						Value = default;
+						Values = list;
+						Type = 'Dropdown';
+					};
                     local DropFunction = {}
                     dropname = dropname or "Dropdown"
+					default = Dropdown.Value or "Select"
                     list = list or {}
                     dropinf = dropinf or "Dropdown info"
                     callback = callback or function() end   
@@ -1901,7 +1983,7 @@ function Library:CreateWindow(title, gameName, themeList)
                     dropOpen.Size = UDim2.new(1, 0, 0, 25)
                     dropOpen.AutoButtonColor = false
                     dropOpen.Font = Enum.Font.SourceSans
-                    dropOpen.Text = ""
+                    dropOpen.Text = default
                     dropOpen.TextColor3 = Color3.fromRGB(0, 0, 0)
                     dropOpen.TextSize = 14.000
                     dropOpen.ClipsDescendants = true
@@ -2100,11 +2182,12 @@ function Library:CreateWindow(title, gameName, themeList)
                             if not focusing then
                                 opened = false
                                 callback(v)
+								Dropdown.Value = v
                                 itemTextbox.Text = dropname.." - "..v
                                 dropFrame:TweenSize(UDim2.new(1, 0, 0, 25), 'InOut', 'Linear', 0.08)
                                 wait(0.1)
                                 updateSectionFrame()
-                                UpdateSize()         
+                                UpdateSize()
                             else
                                 for i,v in next, infoContainer:GetChildren() do
                                     Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
@@ -2144,7 +2227,19 @@ function Library:CreateWindow(title, gameName, themeList)
                             end
                         end)()
                     end
-    
+					
+					function Dropdown:SetValue(Val)
+						if (not Val) then
+							Dropdown.Value = nil;
+							dropOpen.Text = "";
+						elseif table.find(Dropdown.Values, Val) then
+							Dropdown.Value = Val;
+							dropOpen.Text = Val;
+						end;
+					end;
+					
+					Options[Idx] = Dropdown;
+					
                     function DropFunction:Refresh(newList)
                         newList = newList or {}
                         for i,v in next, dropFrame:GetChildren() do
@@ -2188,11 +2283,13 @@ function Library:CreateWindow(title, gameName, themeList)
                                 if not focusing then
                                     opened = false
                                     callback(v)
+									Dropdown.Value = v
                                     itemTextbox.Text = dropname.." - "..v
                                     dropFrame:TweenSize(UDim2.new(1, 0, 0, 25), 'InOut', 'Linear', 0.08)
                                     wait(0.1)
                                     updateSectionFrame()
-                                    UpdateSize()         
+                                    UpdateSize() 
+									
                                 else
                                     for i,v in next, infoContainer:GetChildren() do
                                         Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
@@ -2884,7 +2981,7 @@ function Library:CreateWindow(title, gameName, themeList)
                 
                 function Elements:addLog(textlog)
                     local logcatfunc = {}
-                    
+					
                     local Title = Instance.new("TextLabel")
                     local titleCorner = Instance.new("UICorner")
                     local Frame = Instance.new("ScrollingFrame")
@@ -2912,8 +3009,8 @@ function Library:CreateWindow(title, gameName, themeList)
                     Frame.ClipsDescendants = true
                     Frame.Active = true
                     Frame.ScrollBarThickness = 8
-                    Frame.ScrollBarImageColor3 = themeList.AccentColor
-		    Frame.CanvasSize = UDim2.new(0, 0, 0, string.len(TextLabel.Text))
+                    Frame.ScrollBarImageColor3 = themeList.ImageColor
+					Frame.CanvasSize = UDim2.new(0, 0, 0, string.len(textlog))
                     
                     UICorner.Parent = Frame
                     UICorner.CornerRadius = UDim.new(0, 4)
@@ -2922,36 +3019,36 @@ function Library:CreateWindow(title, gameName, themeList)
                     TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
                     TextLabel.BackgroundTransparency = 1.000
                     TextLabel.BorderSizePixel = 0
-		    TextLabel.Position = UDim2.new(0, 3, 0, 0)
-                    TextLabel.Size = UDim2.new(1, -10, 0, string.len(TextLabel.Text))
+					TextLabel.Position = UDim2.new(0, 3, 0, 0)
+                    TextLabel.Size = UDim2.new(1, -10, 0, string.len(textlog))
                     TextLabel.Font = Enum.Font.Code
                     TextLabel.TextColor3 = themeList.TextColor
                     TextLabel.TextSize = 12.000
-                    TextLabel.Text = textlog.Frame
-		    TextLabel.TextScaled = false
-		    TextLabel.TextWrapped = true
+                    TextLabel.Text = textlog
+					TextLabel.TextScaled = false
+					TextLabel.TextWrapped = true
                     TextLabel.TextXAlignment = Enum.TextXAlignment.Left
                     TextLabel.TextYAlignment = Enum.TextYAlignment.Top
 					
-		    TextLabel:GetPropertyChangedSignal("Text"):Connect(function()
-			Frame.CanvasSize = UDim2.new(0, 0, 0, string.len(TextLabel.Text))
-			TextLabel.Size = UDim2.new(1, -10, 0, string.len(TextLabel.Text))
-		    end)
+					TextLabel:GetPropertyChangedSignal("Text"):Connect(function()
+						Frame.CanvasSize = UDim2.new(0, 0, 0, string.len(TextLabel.Text))
+						TextLabel.Size = UDim2.new(1, -10, 0, string.len(TextLabel.Text))
+					end)
                     
                     coroutine.wrap(function()
                         Title.BackgroundColor3 = themeList.AccentColor
                         Title.TextColor3 = themeList.TextColor
                         Frame.BackgroundColor3 = themeList.ElementColor
-                        Frame.ScrollBarImageColor3 = themeList.AccentColor
+                        Frame.ScrollBarImageColor3 = themeList.ImageColor
                         TextLabel.TextColor3 = themeList.TextColor
                     end)()
                     
-		    updateSectionFrame()
+					updateSectionFrame()
                     UpdateSize()
                     function logcatfunc:Refresh(newLog)
-                        if TextLabel.Text ~= newLog.Frame then
-			    TextLabel.Text = newLog.Frame
-			end
+                        if TextLabel.Text ~= newLog then
+							TextLabel.Text = newLog
+						end
                     end
                     return logcatfunc
                 end
