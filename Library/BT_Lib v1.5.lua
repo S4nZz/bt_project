@@ -2912,7 +2912,7 @@ function Library:CreateWindow(title, gameName, themeList)
                     Frame.ClipsDescendants = true
                     Frame.Active = true
                     Frame.ScrollBarThickness = 8
-                    Frame.ScrollBarImageColor3 = themeList.AccentColor
+                    Frame.ScrollBarImageColor3 = themeList.ImageColor
 		    Frame.CanvasSize = UDim2.new(0, 0, 0, string.len(TextLabel.Text))
                     
                     UICorner.Parent = Frame
@@ -2934,15 +2934,15 @@ function Library:CreateWindow(title, gameName, themeList)
                     TextLabel.TextYAlignment = Enum.TextYAlignment.Top
 					
 		    TextLabel:GetPropertyChangedSignal("Text"):Connect(function()
-			Frame.CanvasSize = UDim2.new(0, 0, 0, string.len(TextLabel.Text))
-			TextLabel.Size = UDim2.new(1, -10, 0, string.len(TextLabel.Text))
+			    Frame.CanvasSize = UDim2.new(0, 0, 0, string.len(TextLabel.Text))
+			    TextLabel.Size = UDim2.new(1, -10, 0, string.len(TextLabel.Text))
 		    end)
                     
                     coroutine.wrap(function()
                         Title.BackgroundColor3 = themeList.AccentColor
                         Title.TextColor3 = themeList.TextColor
                         Frame.BackgroundColor3 = themeList.ElementColor
-                        Frame.ScrollBarImageColor3 = themeList.AccentColor
+                        Frame.ScrollBarImageColor3 = themeList.ImageColor
                         TextLabel.TextColor3 = themeList.TextColor
                     end)()
                     
@@ -2950,7 +2950,7 @@ function Library:CreateWindow(title, gameName, themeList)
                     UpdateSize()
                     function logcatfunc:Refresh(newLog)
                         if TextLabel.Text ~= newLog then
-			    TextLabel.Text = newLog
+				TextLabel.Text = newLog
 			end
                     end
                     return logcatfunc
