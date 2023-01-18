@@ -2912,8 +2912,8 @@ function Library:CreateWindow(title, gameName, themeList)
                     Frame.ClipsDescendants = true
                     Frame.Active = true
                     Frame.ScrollBarThickness = 8
-                    Frame.ScrollBarImageColor3 = themeList.AccentColor
-		    Frame.CanvasSize = UDim2.new(0, 0, 0, string.len(TextLabel.Text))
+                    Frame.ScrollBarImageColor3 = themeList.ImageColor
+					Frame.CanvasSize = UDim2.new(0, 0, 0, string.len(TextLabel.Text))
                     
                     UICorner.Parent = Frame
                     UICorner.CornerRadius = UDim.new(0, 4)
@@ -2922,36 +2922,36 @@ function Library:CreateWindow(title, gameName, themeList)
                     TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
                     TextLabel.BackgroundTransparency = 1.000
                     TextLabel.BorderSizePixel = 0
-		    TextLabel.Position = UDim2.new(0, 3, 0, 0)
+					TextLabel.Position = UDim2.new(0, 3, 0, 0)
                     TextLabel.Size = UDim2.new(1, -10, 0, string.len(TextLabel.Text))
                     TextLabel.Font = Enum.Font.Code
                     TextLabel.TextColor3 = themeList.TextColor
                     TextLabel.TextSize = 12.000
                     TextLabel.Text = textlog
-		    TextLabel.TextScaled = false
-		    TextLabel.TextWrapped = true
+					TextLabel.TextScaled = false
+					TextLabel.TextWrapped = true
                     TextLabel.TextXAlignment = Enum.TextXAlignment.Left
                     TextLabel.TextYAlignment = Enum.TextYAlignment.Top
 					
-		    TextLabel:GetPropertyChangedSignal("Text"):Connect(function()
-			Frame.CanvasSize = UDim2.new(0, 0, 0, string.len(TextLabel.Text))
-			TextLabel.Size = UDim2.new(1, -10, 0, string.len(TextLabel.Text))
-		    end)
+					TextLabel:GetPropertyChangedSignal("Text"):Connect(function()
+						Frame.CanvasSize = UDim2.new(0, 0, 0, string.len(TextLabel.Text))
+						TextLabel.Size = UDim2.new(1, -10, 0, string.len(TextLabel.Text))
+					end)
                     
                     coroutine.wrap(function()
                         Title.BackgroundColor3 = themeList.AccentColor
                         Title.TextColor3 = themeList.TextColor
                         Frame.BackgroundColor3 = themeList.ElementColor
-                        Frame.ScrollBarImageColor3 = themeList.AccentColor
+                        Frame.ScrollBarImageColor3 = themeList.ImageColor
                         TextLabel.TextColor3 = themeList.TextColor
                     end)()
                     
-		    updateSectionFrame()
+					updateSectionFrame()
                     UpdateSize()
                     function logcatfunc:Refresh(newLog)
-                        if TextLabel.Text ~= newLog.Frame then
-			    TextLabel.Text = newLog.Frame
-			end
+                        if TextLabel.Text ~= newLog then
+							TextLabel.Text = newLog
+						end
                     end
                     return logcatfunc
                 end
