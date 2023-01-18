@@ -194,7 +194,7 @@ local SaveManager = {} do
 			self.Library:Notification('Info', string.format('Created config %q', name))
 
 			Options.SaveManager_ConfigList.Values = self:RefreshConfigList()
-			Options.SaveManager_ConfigList:SetValues()
+			--Options.SaveManager_ConfigList:SetValues()
 			Options.SaveManager_ConfigList:SetValue(nil)
 		end)
 		section:addButton('Load config', 'Info', function()
@@ -228,7 +228,7 @@ local SaveManager = {} do
 
 		section:addButton('Refresh config list', 'Info', function()
 			Options.SaveManager_ConfigList.Values = self:RefreshConfigList()
-			Options.SaveManager_ConfigList:SetValues()
+			--Options.SaveManager_ConfigList:SetValues()
 			Options.SaveManager_ConfigList:SetValue(nil)
 		end)
 
