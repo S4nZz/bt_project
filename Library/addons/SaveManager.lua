@@ -191,7 +191,7 @@ local SaveManager = {} do
 				return self.Library:Notification('Error', 'Failed to save config: ' .. err)
 			end
 
-			self.Library:Notification(string.format('Info', 'Created config %q', name))
+			self.Library:Notification('Info', string.format('Created config %q', name))
 
 			Options.SaveManager_ConfigList.Values = self:RefreshConfigList()
 			Options.SaveManager_ConfigList:SetValues()
