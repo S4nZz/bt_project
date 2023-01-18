@@ -1,6 +1,9 @@
 -- Make Library --
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/jmesfo0/bt_project/main/Library/BT_Lib%20v1.5.lua"))()
 
+ -- Make Save Manager --
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/jmesfo0/bt_project/main/Library/addons/SaveManager.lua"))()
+
 -- Make Tables --
 local List = {
     "Dropdown 1";
@@ -44,14 +47,14 @@ Element:addButton("Button", "Info", function()
 end)
 
 -- Make Toggle --
-Element:addToggle("Toggle", "Info", Default, function(state)
+Element:addToggle("Toggle1", "Toggle", "Info", Default, function(state)
     getgenv().Toggle = state
     print(state)
 end)
 
 
 -- Make Dropdown --
-local Dropdown = Element:addDropdown("Dropdown", "Info", List, function(state)
+local Dropdown = Element:addDropdown("Dropdown1", "Dropdown", "Info", "Default", List, function(state)
     print(state)
 end)
 
@@ -61,12 +64,12 @@ Element:addButton("Refresh Dropdown", "Info", function()
 end)
 
 -- Make Slider --
-Element:addSlider("Slider", "Info", 0, 500, 50, function(Value)
+Element:addSlider("Slider1", "Slider", "Info", 0, 500, 50, function(Value)
     print(Value)
 end)
 
 -- Make TextBox --
-Element:addTextBox("Textbox", "Info", "Textbox Text", function(Value)
+Element:addTextBox("Textbox1", "Textbox", "Info", "Textbox Text", function(Value)
     print(Value)
 end)
 
@@ -80,6 +83,8 @@ Element:addLabel("Label")
 
 -- Make Log --
 local Log = Element:addLog(table.concat(TempTable, "\n"))
+
+--Log:Refresh()
 
 -- Refresh Log --
 Element:addButton("Refresh Log", "info", function() 
@@ -105,3 +110,12 @@ for theme, color in pairs(themes) do
         Library:ChangeColor(theme, color3)
     end)
 end
+
+SaveManager:SetLibrary(Library)
+
+SaveManager:SetFolder('BlackTrap/psx')
+
+-- Builds our config menu on the right side of our tab
+SaveManager:BuildConfigSection(Tabs) 
+
+SaveManager:LoadAutoloadConfig()
