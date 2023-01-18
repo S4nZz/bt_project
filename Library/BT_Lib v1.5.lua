@@ -2927,7 +2927,7 @@ function Library:CreateWindow(title, gameName, themeList)
                     TextLabel.Font = Enum.Font.Code
                     TextLabel.TextColor3 = themeList.TextColor
                     TextLabel.TextSize = 12.000
-                    TextLabel.Text = textlog.Frame
+                    TextLabel.Text = textlog
 		    TextLabel.TextScaled = false
 		    TextLabel.TextWrapped = true
                     TextLabel.TextXAlignment = Enum.TextXAlignment.Left
