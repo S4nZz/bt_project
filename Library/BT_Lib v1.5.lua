@@ -2913,7 +2913,7 @@ function Library:CreateWindow(title, gameName, themeList)
                     Frame.Active = true
                     Frame.ScrollBarThickness = 8
                     Frame.ScrollBarImageColor3 = themeList.ImageColor
-					Frame.CanvasSize = UDim2.new(0, 0, 0, string.len(textlog))
+		    Frame.CanvasSize = UDim2.new(0, 0, 0, string.len(textlog))
                     
                     UICorner.Parent = Frame
                     UICorner.CornerRadius = UDim.new(0, 4)
@@ -2922,21 +2922,21 @@ function Library:CreateWindow(title, gameName, themeList)
                     TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
                     TextLabel.BackgroundTransparency = 1.000
                     TextLabel.BorderSizePixel = 0
-					TextLabel.Position = UDim2.new(0, 3, 0, 0)
+		    TextLabel.Position = UDim2.new(0, 3, 0, 0)
                     TextLabel.Size = UDim2.new(1, -10, 0, string.len(textlog))
                     TextLabel.Font = Enum.Font.Code
                     TextLabel.TextColor3 = themeList.TextColor
                     TextLabel.TextSize = 12.000
                     TextLabel.Text = textlog
-					TextLabel.TextScaled = false
-					TextLabel.TextWrapped = true
+		    TextLabel.TextScaled = false
+		    TextLabel.TextWrapped = true
                     TextLabel.TextXAlignment = Enum.TextXAlignment.Left
                     TextLabel.TextYAlignment = Enum.TextYAlignment.Top
 					
-					TextLabel:GetPropertyChangedSignal("Text"):Connect(function()
-						Frame.CanvasSize = UDim2.new(0, 0, 0, string.len(TextLabel.Text))
-						TextLabel.Size = UDim2.new(1, -10, 0, string.len(TextLabel.Text))
-					end)
+		    TextLabel:GetPropertyChangedSignal("Text"):Connect(function()
+			    Frame.CanvasSize = UDim2.new(0, 0, 0, string.len(TextLabel.Text))
+			    TextLabel.Size = UDim2.new(1, -10, 0, string.len(TextLabel.Text))
+		    end)
                     
                     coroutine.wrap(function()
                         Title.BackgroundColor3 = themeList.AccentColor
@@ -2946,12 +2946,12 @@ function Library:CreateWindow(title, gameName, themeList)
                         TextLabel.TextColor3 = themeList.TextColor
                     end)()
                     
-					updateSectionFrame()
+		    updateSectionFrame()
                     UpdateSize()
                     function logcatfunc:Refresh(newLog)
                         if TextLabel.Text ~= newLog then
-							TextLabel.Text = newLog
-						end
+			    TextLabel.Text = newLog
+			end
                     end
                     return logcatfunc
                 end
