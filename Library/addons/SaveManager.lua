@@ -1,5 +1,6 @@
 
 --skidded from 'https://raw.githubusercontent.com/wally-rblx/LinoriaLib/main/addons/SaveManager.lua'
+--lol
 
 local httpService = game:GetService('HttpService')
 
@@ -174,8 +175,8 @@ local SaveManager = {} do
 
 	function SaveManager:BuildConfigSection(tab)
 		assert(self.Library, 'Must set SaveManager.Library')
-		local element = tab:addSection("Setting's")
-		local section = element:newSection("Setting's Manager", true)
+		local element = tab:addSection("Settings")
+		local section = element:newSection("Settings Manager", true)
 		
 		local ConfigList = section:addDropdown('SaveManager_ConfigList', 'Config List', 'List your config', '', self:RefreshConfigList())
 		section:addTextBox('SaveManager_ConfigName', 'Rename config')
