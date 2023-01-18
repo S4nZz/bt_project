@@ -174,7 +174,7 @@ local SaveManager = {} do
 		local element = tab:addSection("Configuration")
 		local section = element:newSection("Configuration Settings", false)
 		
-		section:addDropdown('SaveManager_ConfigList', 'Config list', 'Info', '', self:RefreshConfigList())
+		local ConfigList = section:addDropdown('SaveManager_ConfigList', 'Config list', 'Info', '', self:RefreshConfigList())
 		section:addTextBox('SaveManager_ConfigName', 'Config name')
 
 		--section:AddDivider()
@@ -194,6 +194,7 @@ local SaveManager = {} do
 			self.Library:Notification('Info', string.format('Created config %q', name))
 
 			Options.SaveManager_ConfigList.Values = self:RefreshConfigList()
+			ConfigList:Refresh(Options.SaveManager_ConfigList.Values)
 			--Options.SaveManager_ConfigList:SetValues()
 			Options.SaveManager_ConfigList:SetValue(nil)
 		end)
@@ -228,6 +229,7 @@ local SaveManager = {} do
 
 		section:addButton('Refresh config list', 'Info', function()
 			Options.SaveManager_ConfigList.Values = self:RefreshConfigList()
+			ConfigList:Refresh(Options.SaveManager_ConfigList.Values)
 			--Options.SaveManager_ConfigList:SetValues()
 			Options.SaveManager_ConfigList:SetValue(nil)
 		end)
