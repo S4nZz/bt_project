@@ -82,7 +82,7 @@ end)
 Element:addLabel("Text Label")
 
 -- Make Log --
-local Log = Element:addLog("Log1", TempTable)
+local Log = Element:addLog("Log1", "Log Title", TempTable)
 Log:Refresh(TempTable)
 	
 
