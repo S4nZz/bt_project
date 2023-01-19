@@ -1,4 +1,3 @@
-
 --skidded from 'https://raw.githubusercontent.com/wally-rblx/LinoriaLib/main/addons/SaveManager.lua'
 --lol
 
@@ -47,6 +46,16 @@ local SaveManager = {} do
 					Options[idx]:SetValue(data.value)
 				end
 			end,
+		},
+		Config = {
+			Save = function(idx, object)
+				return { type = 'Config', idx = idx, value = object.Value }
+			end,
+			Load = function(idx, data)
+				if Options[idx] then 
+					Options[idx]:SetValue(data.value)
+				end
+			end,
 		}
 	}
 
@@ -62,6 +71,8 @@ local SaveManager = {} do
 	end
 
 	function SaveManager:Save(name)
+		if not name then return false, 'invalid name' end
+		
 		local fullPath = self.Folder .. '/settings/' .. name .. '.json'
 
 		local data = {
@@ -178,13 +189,15 @@ local SaveManager = {} do
 		local element = tab:addSection("Settings")
 		local section = element:newSection("Settings Manager", true)
 		
-		local ConfigList = section:addDropdown('SaveManager_ConfigList', 'Config List', 'List your config', '', self:RefreshConfigList())
+		local ConfigList = section:addDropdown('SaveManager_ConfigList', 'Config List', 'Display Config List', '', self:RefreshConfigList(), function(Value) 
+			Options.SaveManager_ConfigName:SetValue(Value)
+		end)
 		section:addTextBox('SaveManager_ConfigName', 'Rename config')
 
 		--section:AddDivider()
 
 		section:addButton('Save config', 'Info', function()
-			local name = Options.SaveManager_ConfigName.Value
+			local name = Options.SaveManager_ConfigName.Value or ""
 
 			if name:gsub(' ', '') == '' then 
 				return self.Library:Notification('Error', 'Invalid config name (empty)', 2)
