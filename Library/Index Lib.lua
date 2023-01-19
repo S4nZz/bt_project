@@ -1,8 +1,8 @@
 -- Make Library --
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/S4nZz/bt_project/main/Library/BT_Lib%20v1.5.lua"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/jmesfo0/bt_project/main/Library/BT_Lib%20v1.5.lua"))()
 
  -- Make Save Manager --
-local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/S4nZz/bt_project/main/Library/addons/SaveManager.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/jmesfo0/bt_project/main/Library/addons/SaveManager.lua"))()
 
 -- Make Tables --
 local List = {
@@ -47,15 +47,14 @@ Element:addButton("Button", "Info", function()
 end)
 
 -- Make Toggle --
-Element:addToggle("Toggle1", "Title", "Info", Default, function(state)
-    getgenv().Toggle = state
-    print(state)
+Element:addToggle("Toggle1", "Toggle Title", "Info", Default, function(Value)
+    print(Value)
 end)
 
 
 -- Make Dropdown --
-local Dropdown = Element:addDropdown("Dropdown1", "Title", "Info", "Default", List, function(state)
-    print(state)
+local Dropdown = Element:addDropdown("Dropdown1", "Title", "Info", "Dropdown 1", List, function(Value)
+    print(Value)
 end)
 
 -- Refresh Dropdown --
@@ -64,17 +63,17 @@ Element:addButton("Refresh Dropdown", "Info", function()
 end)
 
 -- Make Slider --
-Element:addSlider("Slider1", "Title", "Info", 0, 500, 50, function(Value)
+Element:addSlider("Slider1", "Slider Title", "Info", 0, 500, 50, function(Value)
     print(Value)
 end)
 
 -- Make TextBox --
-Element:addTextBox("Textbox1", "Title", "Info", "Placeholder Title", function(Value)
+Element:addTextBox("Textbox1", "Textbox Title", "Info", "", function(Value)
     print(Value)
 end)
 
 -- Make Keybind --
-Element:addKeybind("Title", "Info", Enum.KeyCode.F, function(Value)
+Element:addKeybind("Keybind Title", "Info", Enum.KeyCode.F, function(Value)
     print(Value)
 end)
 
@@ -115,7 +114,6 @@ SaveManager:SetLibrary(Library)
 
 SaveManager:SetFolder('BlackTrap/psx')
 
--- Builds our config menu on the right side of our tab
 SaveManager:BuildConfigSection(Tabs) 
 
 SaveManager:LoadAutoloadConfig()
