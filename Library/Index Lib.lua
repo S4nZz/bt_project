@@ -18,12 +18,13 @@ local newList = {
     }
 
 local TempTable = {}
+local newTable = {}
 
 for i=1,100 do
   table.insert(TempTable, i..". Text Entry")
 end
 
-local newTable = {}
+
 
 for i=1,100 do
   table.insert(newTable, i..". New Text Entry")
@@ -53,7 +54,7 @@ end)
 
 
 -- Make Dropdown --
-local Dropdown = Element:addDropdown("Dropdown1", "Title", "Info", "Dropdown 1", List, function(Value)
+local Dropdown = Element:addDropdown("Dropdown1", "Dropdown Title", "Info", "Dropdown 1", List, function(Value)
     print(Value)
 end)
 
@@ -81,13 +82,13 @@ end)
 Element:addLabel("Text Label")
 
 -- Make Log --
-local Log = Element:addLog(table.concat(TempTable, "\n"))
-
---Log:Refresh()
+local Log = Element:addLog("Log1", TempTable)
+Log:Refresh(TempTable)
+	
 
 -- Refresh Log --
 Element:addButton("Refresh Log", "info", function() 
-  Log:Refresh(table.concat(newTable, "\n"))
+  Log:Refresh(newTable)
 end)
 
 -- Make Notification --
@@ -110,10 +111,14 @@ for theme, color in pairs(themes) do
     end)
 end
 
+-- SaveManager Set Library --
 SaveManager:SetLibrary(Library)
 
+-- SaveManager Set Folder --
 SaveManager:SetFolder('BlackTrap/psx')
 
+-- SaveManager Add Tab/Config Section --
 SaveManager:BuildConfigSection(Tabs) 
 
+-- SaveManager AutoLoad Configuration --
 SaveManager:LoadAutoloadConfig()
