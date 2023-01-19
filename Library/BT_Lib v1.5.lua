@@ -1400,6 +1400,7 @@ function Library:CreateWindow(title, gameName, themeList)
 						TextBox.PlaceholderText = Text;
 						TextBox.Text = Text;
 						Textbox.Value = TextBox.Text;
+						callback(Textbox.Value)
 					end;
 					
 					Options[Idx] = Textbox;
@@ -1643,7 +1644,7 @@ function Library:CreateWindow(title, gameName, themeList)
                     slidTip = slidTip or "Slider tip here"
                     maxvalue = maxvalue
                     minvalue = minvalue or 0
-                    startVal = (math.clamp(startVal, minvalue, maxvalue))
+                    startVal = (math.clamp(Slider.Value, minvalue, maxvalue))
                     if startVal > maxvalue then set = maxvalue end
                     callback = callback or function() end
     
@@ -1915,19 +1916,11 @@ function Library:CreateWindow(title, gameName, themeList)
                             viewDe = false
                         end
                     end)
+					
 					function Slider:SetValue(Str)
-						local Num = tonumber(Str);
-
-						if (not Num) then
-							return;
-						end;
-
-						Num = math.clamp(Num, minvalue, maxvalue);
-
-						
-						Value = Num
-						Slider.Value = Num;
-						
+						Slider.Value = Str;
+						togName.Text = slidInf.." - "..Slider.Value
+						callback(Slider.Value)
 					end;
 					Options[Idx] = Slider;
                 end
@@ -1941,7 +1934,7 @@ function Library:CreateWindow(title, gameName, themeList)
                     local DropFunction = {}
                     dropname = dropname or "Dropdown"
 					default = Dropdown.Value or "Select"
-                    list = list or {}
+                    list = Dropdown.Values or {}
                     dropinf = dropinf or "Dropdown info"
                     callback = callback or function() end   
     
@@ -2230,11 +2223,12 @@ function Library:CreateWindow(title, gameName, themeList)
 					
 					function Dropdown:SetValue(Val)
 						if (not Val) then
+							itemTextbox.Text = dropname
 							Dropdown.Value = nil;
-							dropOpen.Text = "";
 						elseif table.find(Dropdown.Values, Val) then
+							itemTextbox.Text = dropname.." - "..Val
 							Dropdown.Value = Val;
-							dropOpen.Text = Val;
+							callback(Dropdown.Value)
 						end;
 					end;
 					
@@ -2979,9 +2973,13 @@ function Library:CreateWindow(title, gameName, themeList)
                     setcolor({h,s,v})
                 end
                 
-                function Elements:addLog(textlog)
+                function Elements:addLog(Idx, textname, textlog)
                     local logcatfunc = {}
-					
+					local textname = textname or "• Log •"
+					local Config = {
+						Value = textlog;
+						Type = 'Config';
+					};
                     local Title = Instance.new("TextLabel")
                     local titleCorner = Instance.new("UICorner")
                     local Frame = Instance.new("ScrollingFrame")
@@ -2994,7 +2992,7 @@ function Library:CreateWindow(title, gameName, themeList)
                     Title.BorderSizePixel = 0
                     Title.Size = UDim2.new(1, 0, 0, 15)
                     Title.Font = Enum.Font.SourceSansBold
-                    Title.Text = "• Console Log •"
+                    Title.Text = textname
                     Title.TextColor3 = themeList.TextColor
                     Title.TextSize = 14.000
                     Title.TextXAlignment = Enum.TextXAlignment.Center
@@ -3010,7 +3008,7 @@ function Library:CreateWindow(title, gameName, themeList)
                     Frame.Active = true
                     Frame.ScrollBarThickness = 8
                     Frame.ScrollBarImageColor3 = themeList.ImageColor
-		    Frame.CanvasSize = UDim2.new(0, 0, 0, string.len(TextLabel.Text))
+					Frame.CanvasSize = UDim2.new(0, 0, 0, string.len(TextLabel.Text))
                     
                     UICorner.Parent = Frame
                     UICorner.CornerRadius = UDim.new(0, 4)
@@ -3019,21 +3017,21 @@ function Library:CreateWindow(title, gameName, themeList)
                     TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
                     TextLabel.BackgroundTransparency = 1.000
                     TextLabel.BorderSizePixel = 0
-		    TextLabel.Position = UDim2.new(0, 3, 0, 0)
+					TextLabel.Position = UDim2.new(0, 3, 0, 0)
                     TextLabel.Size = UDim2.new(1, -10, 0, string.len(TextLabel.Text))
                     TextLabel.Font = Enum.Font.Code
                     TextLabel.TextColor3 = themeList.TextColor
                     TextLabel.TextSize = 12.000
-                    TextLabel.Text = textlog
-		    TextLabel.TextScaled = false
-		    TextLabel.TextWrapped = true
+                    TextLabel.Text = table.concat(Config.Value, "\n")
+					TextLabel.TextScaled = false
+					TextLabel.TextWrapped = true
                     TextLabel.TextXAlignment = Enum.TextXAlignment.Left
                     TextLabel.TextYAlignment = Enum.TextYAlignment.Top
 					
-		    TextLabel:GetPropertyChangedSignal("Text"):Connect(function()
-			Frame.CanvasSize = UDim2.new(0, 0, 0, string.len(TextLabel.Text))
-			TextLabel.Size = UDim2.new(1, -10, 0, string.len(TextLabel.Text))
-		    end)
+					TextLabel:GetPropertyChangedSignal("Text"):Connect(function()
+					Frame.CanvasSize = UDim2.new(0, 0, 0, string.len(TextLabel.Text))
+					TextLabel.Size = UDim2.new(1, -10, 0, string.len(TextLabel.Text))
+					end)
                     
                     coroutine.wrap(function()
                         Title.BackgroundColor3 = themeList.AccentColor
@@ -3043,13 +3041,24 @@ function Library:CreateWindow(title, gameName, themeList)
                         TextLabel.TextColor3 = themeList.TextColor
                     end)()
                     
-		    updateSectionFrame()
-                    UpdateSize()
-                    function logcatfunc:Refresh(newLog)
-                        if TextLabel.Text ~= newLog then
-			    TextLabel.Text = newLog
-			end
+					updateSectionFrame()
+					UpdateSize()
+					
+					function Config:SetValue(newLog)
+						if not newLog then return end
+						Config.Value = newLog
+						if TextLabel.Text ~= table.concat(Config.Value, "\n") then
+							TextLabel.Text = table.concat(Config.Value, "\n")
+						end
                     end
+							
+					function logcatfunc:Refresh(newLog)
+						if TextLabel.Text ~= table.concat(newLog, "\n") then
+							TextLabel.Text = table.concat(newLog, "\n")
+							Config.Value = newLog
+						end
+                    end
+					Options[Idx] = Config;
                     return logcatfunc
                 end
 
