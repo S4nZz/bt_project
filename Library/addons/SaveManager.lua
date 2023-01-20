@@ -186,8 +186,8 @@ local SaveManager = {} do
 
 	function SaveManager:BuildConfigSection(tab)
 		assert(self.Library, 'Must set SaveManager.Library')
-		local element = tab:addSection("Settings")
-		local section = element:newSection("Settings Manager", true)
+		local element = tab:addSection("Configuration")
+		local section = element:newSection("Configuration Manager", true)
 		
 		local ConfigList = section:addDropdown('SaveManager_ConfigList', 'Config List', 'Display Config List', '', self:RefreshConfigList(), function(Value) 
 			Options.SaveManager_ConfigName:SetValue(Value)
