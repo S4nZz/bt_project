@@ -410,13 +410,13 @@ function Library:CreateWindow(title, gameName, themeList)
     end)
 
     mainDiscord.MouseButton1Click:Connect(function()
-        setclipboard("https://discord.gg/Mp7qppfwER")
+        setclipboard("https://discord.gg/kwsK36GA5F")
         wait(.1)
         game:GetService("StarterGui"):SetCore("SendNotification",{
             Title = "Discord",
-            Text = "Discord copied on your clipboard",
+            Text = "Discord link copied on your clipboard",
             Button1 = "Okay",
-            Duration = 20
+            Duration = 5
         })
     end)
 
