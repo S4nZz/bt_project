@@ -178,8 +178,12 @@ local SaveManager = {} do
 			if not success then
 				return self.Library:Notification('Error', 'Failed to load autoload config: ' .. err)
 			end
-
-			self.Library:Notification('Info', string.format('Auto loaded config %q', name))
+			game:GetService("StarterGui"):SetCore("SendNotification",{
+			    Title = "Info",
+			    Text = string.format('Auto loaded config %q', name),
+			    Button1 = "Ok",
+			    Duration = 5
+			})
 		end
 	end
 
