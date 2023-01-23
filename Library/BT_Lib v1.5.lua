@@ -276,7 +276,7 @@ function Library:CreateWindow(title, gameName, themeList)
     openBT.BorderSizePixel = 0
     openBT.Size = UDim2.new(0, 35, 0, 35)
     openBT.Image = "rbxassetid://11482100481"
-    openBT.ImageColor3 = Color3.fromRGB(255, 0, 0)
+    openBT.ImageColor3 = Color3.fromRGB(0, 0, 0)
     
     openBT.MouseLeave:Connect(function()
         Utility:TweenObject(openBT, {Size = UDim2.new(0, 35, 0, 35)}, 0.1)
@@ -306,7 +306,7 @@ function Library:CreateWindow(title, gameName, themeList)
     Main.BorderSizePixel = 0
     Main.Position = UDim2.new(0.481963903, 0, 0.5, 0)
     Main.Size = UDim2.new(0, 0, 0, 0)
-    Main.Image = "rbxassetid://11482100481"
+    Main.Image = "http://www.roblox.com/asset/?id=12058283358"
     Main.ClipsDescendants = true
     wait(0.2)
     Utility:TweenObject(Main, {Size = UDim2.new(0, 600, 0, 400)}, 0.1)
@@ -343,8 +343,8 @@ function Library:CreateWindow(title, gameName, themeList)
     mainLogo.BorderSizePixel = 0
     mainLogo.Position = UDim2.new(0.00200000009, 3, 0.114, 0)
     mainLogo.Size = UDim2.new(0, 21, 0, 21)
-    mainLogo.Image = "http://www.roblox.com/asset/?id=12021503727"
-    mainLogo.ImageColor3 = Color3.fromRGB(255, 0, 0)
+    mainLogo.Image = "rbxassetid://11482100481"
+    mainLogo.ImageColor3 = Color3.fromRGB(0, 0, 0)
 
     mainTitle.Name = "mainTitle"
     mainTitle.Parent = mainTopHeader
