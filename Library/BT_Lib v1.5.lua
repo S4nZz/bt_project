@@ -276,7 +276,7 @@ function Library:CreateWindow(title, gameName, themeList)
     openBT.BorderSizePixel = 0
     openBT.Size = UDim2.new(0, 35, 0, 35)
     openBT.Image = "rbxassetid://11482100481"
-    openBT.ImageColor3 = Color3.fromRGB(0, 0, 0)
+    --openBT.ImageColor3 = Color3.fromRGB(0, 0, 0)
     
     openBT.MouseLeave:Connect(function()
         Utility:TweenObject(openBT, {Size = UDim2.new(0, 35, 0, 35)}, 0.1)
@@ -344,7 +344,7 @@ function Library:CreateWindow(title, gameName, themeList)
     mainLogo.Position = UDim2.new(0.00200000009, 3, 0.114, 0)
     mainLogo.Size = UDim2.new(0, 21, 0, 21)
     mainLogo.Image = "rbxassetid://11482100481"
-    mainLogo.ImageColor3 = Color3.fromRGB(0, 0, 0)
+    --mainLogo.ImageColor3 = Color3.fromRGB(0, 0, 0)
 
     mainTitle.Name = "mainTitle"
     mainTitle.Parent = mainTopHeader
