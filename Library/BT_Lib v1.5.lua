@@ -412,12 +412,7 @@ function Library:CreateWindow(title, gameName, themeList)
     mainDiscord.MouseButton1Click:Connect(function()
         setclipboard("https://discord.gg/kwsK36GA5F")
         wait(.1)
-        game:GetService("StarterGui"):SetCore("SendNotification",{
-            Title = "Discord",
-            Text = "Discord link copied on your clipboard",
-            Button1 = "Okay",
-            Duration = 5
-        })
+        self:Notify("Discord", "Discord Link Copied To Clipboard")
     end)
 
     mainFrame.Name = "mainFrame"
@@ -521,7 +516,21 @@ function Library:CreateWindow(title, gameName, themeList)
             themeList.ElementColor = color
         end
     end
-
+	function Library:Notify(nTitle, nText, nTime, nOk)
+		game:GetService("StarterGui"):SetCore("SendNotification",{
+			Title = nTitle,
+			Text = nText,
+			if nOk then
+				Button1 = "Ok",
+			end
+			if nTime then
+				Duration = nTime
+			else
+				Duration = 5
+			end
+		})
+	end
+	
     function Library:Notification(nTitle, nText)
 
         local NotifFrame = Instance.new("TextButton")
