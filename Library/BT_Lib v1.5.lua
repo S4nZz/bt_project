@@ -179,45 +179,45 @@ function Library:ToggleUI()
     end
 end
 
-function Library:CreateWindow(title, gameName, themeList)
-    if not themeList then
-        themeList = themes
+function Library:CreateWindow(title, gameName)
+    if not Theme then
+        Theme = themes
     end
-    if themeList == "Default" then
-        themeList = themeStyles.Default
-    elseif themeList == "DarkTheme" then
-        themeList = themeStyles.DarkTheme
-    elseif themeList == "LightTheme" then
-        themeList = themeStyles.LightTheme
-    elseif themeList == "BloodTheme" then
-        themeList = themeStyles.BloodTheme
-    elseif themeList == "GrapeTheme" then
-        themeList = themeStyles.GrapeTheme
-    elseif themeList == "Ocean" then
-        themeList = themeStyles.Ocean
-    elseif themeList == "Midnight" then
-        themeList = themeStyles.Midnight
-    elseif themeList == "Sentinel" then
-        themeList = themeStyles.Sentinel
-    elseif themeList == "Synapse" then
-        themeList = themeStyles.Synapse
-    elseif themeList == "Serpent" then
-        themeList = themeStyles.Serpent
+    if Theme == "Default" then
+        Theme = themeStyles.Default
+    elseif Theme == "DarkTheme" then
+        Theme = themeStyles.DarkTheme
+    elseif Theme == "LightTheme" then
+        Theme = themeStyles.LightTheme
+    elseif Theme == "BloodTheme" then
+        Theme = themeStyles.BloodTheme
+    elseif Theme == "GrapeTheme" then
+        Theme = themeStyles.GrapeTheme
+    elseif Theme == "Ocean" then
+        Theme = themeStyles.Ocean
+    elseif Theme == "Midnight" then
+        Theme = themeStyles.Midnight
+    elseif Theme == "Sentinel" then
+        Theme = themeStyles.Sentinel
+    elseif Theme == "Synapse" then
+        Theme = themeStyles.Synapse
+    elseif Theme == "Serpent" then
+        Theme = themeStyles.Serpent
     else
-        if themeList.AccentColor == nil then
-            themeList.AccentColor = Color3.fromRGB(45, 45, 45)
-        elseif themeList.Background == nil then
-            themeList.Background = Color3.fromRGB(30, 30, 30)
-        elseif themeList.ImageColor == nil then
-            themeList.ImageColor = Color3.fromRGB(255, 255, 255)
-        elseif themeList.TextColor == nil then
-            themeList.TextColor = Color3.fromRGB(180, 180, 180)
-        elseif themeList.ElementColor == nil then
-            themeList.ElementColor = Color3.fromRGB(12, 12, 12)
+        if Theme.AccentColor == nil then
+            Theme.AccentColor = Color3.fromRGB(45, 45, 45)
+        elseif Theme.Background == nil then
+            Theme.Background = Color3.fromRGB(30, 30, 30)
+        elseif Theme.ImageColor == nil then
+            Theme.ImageColor = Color3.fromRGB(255, 255, 255)
+        elseif Theme.TextColor == nil then
+            Theme.TextColor = Color3.fromRGB(180, 180, 180)
+        elseif Theme.ElementColor == nil then
+            Theme.ElementColor = Color3.fromRGB(12, 12, 12)
         end
     end
     
-    themeList = themeList or {}
+    Theme = themeList or {}
     local selectedTab 
     title = title or "Library"
     table.insert(Library, title)
