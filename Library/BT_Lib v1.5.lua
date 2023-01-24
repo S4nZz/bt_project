@@ -517,18 +517,12 @@ function Library:CreateWindow(title, gameName, themeList)
         end
     end
 	
-	function Library:Notify(nTitle, nText, nTime, nOk)
+	function Library:Notify(nTitle, nText)
 		game:GetService("StarterGui"):SetCore("SendNotification",{
-			Title = nTitle
-			Text = nText
-			if nOk == true then
-				Button1 = "Ok"
-			end
-			if nTime > 5 then
-				Duration = nTime
-			else
-				Duration = 5
-			end
+			Title = nTitle,
+			Text = nText,
+			Button1 = "Ok",
+			Duration = 5,
 		})
 	end
 	
