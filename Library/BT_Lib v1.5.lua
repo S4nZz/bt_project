@@ -3064,7 +3064,7 @@ function Library:CreateWindow(title, gameName, themeList)
                     label.BorderSizePixel = 0
                     label.ClipsDescendants = true
                     label.Text = title
-                    label.Size = UDim2.new(1, 0, 0, 15 + string.len(label.Text))
+                    label.Size = UDim2.new(1, 0, 0, string.len(label.Text))
                     label.Font = Enum.Font.SourceSansBold
                     label.Text = "  "..title
                     label.RichText = true
@@ -3084,7 +3084,7 @@ function Library:CreateWindow(title, gameName, themeList)
                     end
 		    
 		    label:GetPropertyChangedSignal("Text"):Connect(function()
-			label.Size = UDim2.new(1, 0, 0, 15 + string.len(label.Text))
+			label.Size = UDim2.new(1, 0, 0, string.len(label.Text))
 		    end)
     
                     coroutine.wrap(function()
