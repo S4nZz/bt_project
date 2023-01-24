@@ -31,7 +31,7 @@ for i=1,100 do
 end
 
 -- Make Windows --
-local Windows = Library:CreateWindow("Hub", "Game", "Default")
+local Windows = Library:CreateWindow("Hub", "Game")
 
 -- Make Tabs --
 local Tabs = Windows:addTab("Tabs", img)
