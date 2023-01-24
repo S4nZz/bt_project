@@ -276,15 +276,16 @@ function Library:CreateWindow(title, gameName, themeList)
     openBT.BorderSizePixel = 0
     openBT.Size = UDim2.new(0, 35, 0, 35)
     openBT.Image = "rbxassetid://11482100481"
+    openBT.Position = UDim2.new(0, 1, 0, 1)
     --openBT.ImageColor3 = Color3.fromRGB(0, 0, 0)
     
     openBT.MouseLeave:Connect(function()
-        Utility:TweenObject(openBT, {Size = UDim2.new(0, 35, 0, 35)}, 0.1)
+        Utility:TweenObject(openBT, {Size = UDim2.new(0, 25, 0, 25)}, 0.1)
         Utility:TweenObject(openBT, {BackgroundTransparency = 1}, 0.1)
     end)
     
     openBT.MouseEnter:Connect(function()
-        Utility:TweenObject(openBT, {Size = UDim2.new(0, 25, 0, 25)}, 0.1)
+        Utility:TweenObject(openBT, {Size = UDim2.new(0, 35, 0, 35)}, 0.1)
         Utility:TweenObject(openBT, {BackgroundTransparency = 0.5}, 0.1)
     end)
 
