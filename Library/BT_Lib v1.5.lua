@@ -1937,8 +1937,8 @@ function Library:CreateWindow(title, gameName)
 					};
                     local DropFunction = {}
                     dropname = dropname or "Dropdown"
-					default = Dropdown.Value or "Select"
-                    list = Dropdown.Values or {}
+		    default = Dropdown.Value or "Select"
+                    list = list or {}
                     dropinf = dropinf or "Dropdown info"
                     callback = callback or function() end   
     
