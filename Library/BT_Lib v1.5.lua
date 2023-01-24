@@ -217,7 +217,7 @@ function Library:CreateWindow(title, gameName)
         end
     end
     
-    themeList = themeList or {}
+    themeList = Theme or {}
     local selectedTab 
     title = title or "Library"
     table.insert(Library, title)
