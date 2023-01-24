@@ -179,6 +179,12 @@ function Library:ToggleUI()
     end
 end
 
+function Library:DestroyUI()
+    if game.CoreGui[LibName] then
+        game.CoreGui[LibName]:Destroy()
+    end
+end
+
 function Library:CreateWindow(title, gameName)
     if Theme == "Default" then
         Theme = themeStyles.Default
