@@ -3105,7 +3105,7 @@ function Library:CreateWindow(title, gameName, themeList)
                 return Elements
             end
             return secItems
-        end
+        end 
         return tabSections
     end
     return CreateTab
