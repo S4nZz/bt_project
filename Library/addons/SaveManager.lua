@@ -176,14 +176,9 @@ local SaveManager = {} do
 
 			local success, err = self:Load(name)
 			if not success then
-				return self.Library:Notification('Error', 'Failed to load autoload config: ' .. err)
+				return self.Library:Notify('Error', 'Failed to load autoload config: ' .. err)
 			end
-			game:GetService("StarterGui"):SetCore("SendNotification",{
-			    Title = "Info",
-			    Text = string.format('Auto loaded config %q', name),
-			    Button1 = "Ok",
-			    Duration = 5
-			})
+			self.Library:Notify(string.format('Auto loaded config %q', name))
 		end
 	end
 
@@ -204,15 +199,15 @@ local SaveManager = {} do
 			local name = Options.SaveManager_ConfigName.Value or ""
 
 			if name:gsub(' ', '') == '' then 
-				return self.Library:Notification('Error', 'Invalid config name (empty)', 2)
+				return self.Library:Notify('Error', 'Invalid config name (empty)', 2)
 			end
 
 			local success, err = self:Save(name)
 			if not success then
-				return self.Library:Notification('Error', 'Failed to save config: ' .. err)
+				return self.Library:Notify('Error', 'Failed to save config: ' .. err)
 			end
 
-			self.Library:Notification('Info', string.format('Created config %q', name))
+			self.Library:Notify(string.format('Auto loaded config %q', name))
 
 			Options.SaveManager_ConfigList.Values = self:RefreshConfigList()
 			ConfigList:Refresh(Options.SaveManager_ConfigList.Values)
@@ -224,10 +219,10 @@ local SaveManager = {} do
 
 			local success, err = self:Load(name)
 			if not success then
-				return self.Library:Notification('Error', 'Failed to load config: ' .. err)
+				return self.Library:Notify('Error', 'Failed to load config: ' .. err)
 			end
 
-			self.Library:Notification("Loaded", string.format('Loaded config %q', name))
+			self.Library:Notify("Loaded", string.format('Loaded config %q', name))
 		end)
 
 		section:addButton('Overwrite config', 'Info', function()
@@ -235,17 +230,17 @@ local SaveManager = {} do
 
 			local success, err = self:Save(name)
 			if not success then
-				return self.Library:Notification('Error', 'Failed to overwrite config: ' .. err)
+				return self.Library:Notify('Error', 'Failed to overwrite config: ' .. err)
 			end
 
-			self.Library:Notification('Saved', string.format('Overwrote config %q', name))
+			self.Library:Notify('Saved', string.format('Overwrote config %q', name))
 		end)
 		
 		section:addButton('Autoload config', 'Info', function()
 			local name = Options.SaveManager_ConfigList.Value
 			writefile(self.Folder .. '/settings/autoload.txt', name)
 			SaveManager.AutoloadLabel:UpdateLabel('Current autoload config: ' .. name)
-			self.Library:Notification('Auto Load', string.format('Set %q to auto load', name))
+			self.Library:Notify('Auto Load', string.format('Set %q to auto load', name))
 		end)
 
 		section:addButton('Refresh config list', 'Info', function()
