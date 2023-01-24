@@ -180,29 +180,26 @@ function Library:ToggleUI()
 end
 
 function Library:CreateWindow(title, gameName)
-    if not Theme then
-        Theme = themes
-    end
     if Theme == "Default" then
-        Theme = themeStyles.Default
-    elseif Theme == "DarkTheme" then
-        Theme = themeStyles.DarkTheme
-    elseif Theme == "LightTheme" then
-        Theme = themeStyles.LightTheme
-    elseif Theme == "BloodTheme" then
-        Theme = themeStyles.BloodTheme
-    elseif Theme == "GrapeTheme" then
-        Theme = themeStyles.GrapeTheme
-    elseif Theme == "Ocean" then
-        Theme = themeStyles.Ocean
-    elseif Theme == "Midnight" then
-        Theme = themeStyles.Midnight
-    elseif Theme == "Sentinel" then
-        Theme = themeStyles.Sentinel
-    elseif Theme == "Synapse" then
-        Theme = themeStyles.Synapse
-    elseif Theme == "Serpent" then
-        Theme = themeStyles.Serpent
+        themeList = themeStyles.Default
+    elseif themeList == "DarkTheme" then
+        themeList = themeStyles.DarkTheme
+    elseif themeList == "LightTheme" then
+        themeList = themeStyles.LightTheme
+    elseif themeList == "BloodTheme" then
+        themeList = themeStyles.BloodTheme
+    elseif themeList == "GrapeTheme" then
+        themeList = themeStyles.GrapeTheme
+    elseif themeList == "Ocean" then
+        themeList = themeStyles.Ocean
+    elseif themeList == "Midnight" then
+        themeList = themeStyles.Midnight
+    elseif themeList == "Sentinel" then
+        themeList = themeStyles.Sentinel
+    elseif themeList == "Synapse" then
+        themeList = themeStyles.Synapse
+    elseif themeList == "Serpent" then
+        themeList = themeStyles.Serpent
     else
         if themeList.AccentColor == nil then
             themeList.AccentColor = Color3.fromRGB(45, 45, 45)
