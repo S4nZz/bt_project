@@ -516,6 +516,7 @@ function Library:CreateWindow(title, gameName, themeList)
             themeList.ElementColor = color
         end
     end
+	
 	function Library:Notify(nTitle, nText, nTime, nOk)
 		game:GetService("StarterGui"):SetCore("SendNotification",{
 			Title = nTitle,
