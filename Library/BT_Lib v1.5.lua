@@ -17,6 +17,9 @@ local Objects = {}
 local Toggles = {};
 local Options = {};
 
+local MenuToggle = getgenv().Toggle or Enum.KeyCode.End
+local themeList = getgenv().Theme or "Default"
+
 getgenv().Toggles = Toggles;
 getgenv().Options = Options;
 
@@ -153,7 +156,6 @@ local themeStyles = {
 local oldTheme = ""
 
 local SettingsT = {
-
 }
 
 local Name = "BTConfig.JSON"
@@ -257,7 +259,7 @@ function Library:CreateWindow(title, gameName, themeList)
     ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
     game:GetService("UserInputService").InputBegan:connect(function(input, hide) 
-        if input.KeyCode == Enum.KeyCode.Tab then 
+        if input.KeyCode == MenuToggle then 
             game.CoreGui[LibName].Enabled = not game.CoreGui[LibName].Enabled
         end
     end)
