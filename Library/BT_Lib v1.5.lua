@@ -204,20 +204,20 @@ function Library:CreateWindow(title, gameName)
     elseif Theme == "Serpent" then
         Theme = themeStyles.Serpent
     else
-        if Theme.AccentColor == nil then
-            Theme.AccentColor = Color3.fromRGB(45, 45, 45)
-        elseif Theme.Background == nil then
-            Theme.Background = Color3.fromRGB(30, 30, 30)
-        elseif Theme.ImageColor == nil then
-            Theme.ImageColor = Color3.fromRGB(255, 255, 255)
-        elseif Theme.TextColor == nil then
-            Theme.TextColor = Color3.fromRGB(180, 180, 180)
-        elseif Theme.ElementColor == nil then
-            Theme.ElementColor = Color3.fromRGB(12, 12, 12)
+        if themeList.AccentColor == nil then
+            themeList.AccentColor = Color3.fromRGB(45, 45, 45)
+        elseif themeList.Background == nil then
+            themeList.Background = Color3.fromRGB(30, 30, 30)
+        elseif themeList.ImageColor == nil then
+            themeList.ImageColor = Color3.fromRGB(255, 255, 255)
+        elseif themeList.TextColor == nil then
+            themeList.TextColor = Color3.fromRGB(180, 180, 180)
+        elseif themeList.ElementColor == nil then
+            themeList.ElementColor = Color3.fromRGB(12, 12, 12)
         end
     end
     
-    Theme = Theme or {}
+    themeList = themeList or {}
     local selectedTab 
     title = title or "Library"
     table.insert(Library, title)
