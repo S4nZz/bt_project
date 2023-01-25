@@ -71,6 +71,7 @@ local SaveManager = {} do
 	end
 
 	function SaveManager:Save(name)
+		name = name.gsub("%s+", "")
 		if not name then return false, 'invalid name' end
 		
 		local fullPath = self.Folder .. '/settings/' .. name .. '.json'
