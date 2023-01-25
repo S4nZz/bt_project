@@ -817,7 +817,8 @@ function Library:CreateWindow(title, gameName)
 
         local sectab = false
         
-        function tabSections:addSection(secTitle)
+        function tabSections:addSection(secTitle, default)
+	    local default = default or false
             local sectionTitle = Instance.new("TextButton")
             local sectionCorner = Instance.new("UICorner")
             local pageContainer = Instance.new("ScrollingFrame")
@@ -859,6 +860,13 @@ function Library:CreateWindow(title, gameName)
             
             sectionCorner.Parent = sectionTitle
             sectionCorner.CornerRadius = UDim.new(0, 4)
+			
+	    if default then
+	    	sectab = false
+		pageContainer.Visible = true
+                sectionTitle.BackgroundTransparency = 0
+                UpdateSize()
+	    end
             
             if sectab then
                 sectab = false
