@@ -18,10 +18,11 @@ local Toggles = {};
 local Options = {};
 
 local Theme = getgenv().Theme or "Default"
+local MenuToggle = getgenv().MenuToggle or Enum.KeyCode.End
 
 getgenv().Toggles = Toggles;
 getgenv().Options = Options;
-getgenv().MenuToggle = Enum.KeyCode.End
+
 
 function Library:AttemptSave()
     if Library.SaveManager then
@@ -172,10 +173,8 @@ end)
 local LibName = tostring(math.random(1, 100))..tostring(math.random(1,50))..tostring(math.random(1, 100))
 
 function Library:ToggleUI()
-    if game.CoreGui[LibName].Enabled then
-        game.CoreGui[LibName].Enabled = false
-    else
-        game.CoreGui[LibName].Enabled = true
+    if game.CoreGui[LibName] then
+	game.CoreGui[LibName].Enabled = not game.CoreGui[LibName].Enabled
     end
 end
 
@@ -262,7 +261,7 @@ function Library:CreateWindow(title, gameName)
     ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
     game:GetService("UserInputService").InputBegan:connect(function(input, hide) 
-        if input.KeyCode == getgenv().MenuToggle then 
+        if input.KeyCode == MenuToggle then 
             game.CoreGui[LibName].Enabled = not game.CoreGui[LibName].Enabled
         end
     end)
