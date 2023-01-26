@@ -2239,18 +2239,18 @@ function Library:CreateWindow(title, gameName)
                         end)()
                     end
 					
-					function Dropdown:SetValue(Val)
-						if (not Val) then
-							itemTextbox.Text = dropname
-							Dropdown.Value = nil;
-						elseif table.find(Dropdown.Values, Val) then
-							itemTextbox.Text = dropname.." - "..Val
-							Dropdown.Value = Val;
-							callback(Dropdown.Value)
-						end;
-					end;
-					
-					Options[Idx] = Dropdown;
+			function Dropdown:SetValue(Val)
+				if (not Val) then
+					dropOpen.Text = "";
+					Dropdown.Value = nil;
+				elseif table.find(Dropdown.Values, Val) then
+					dropOpen.Text = dropname.." - "..Val
+					Dropdown.Value = Val;
+					callback(Dropdown.Value)
+				end;
+			end;
+
+			Options[Idx] = Dropdown;
 					
                     function DropFunction:Refresh(newList)
                         newList = newList or {}
