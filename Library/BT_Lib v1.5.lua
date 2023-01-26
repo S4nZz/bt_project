@@ -17,7 +17,7 @@ local Objects = {}
 local Toggles = {};
 local Options = {};
 
-local MenuToggle = getgenv().Toggle or Enum.KeyCode.End
+local MenuToggle = getgenv().Hotkey or Enum.KeyCode.End
 local Theme = getgenv().Theme or "Default"
 
 getgenv().Toggles = Toggles;
