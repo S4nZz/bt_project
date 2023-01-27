@@ -47,7 +47,7 @@ local SaveManager = {} do
 				end
 			end,
 		},
-		Color = {
+		Colorpicker = {
 			Save = function(idx, object)
 				return { type = 'Colorpicker', idx = idx, value = object.Value:ToHex() }
 			end,
