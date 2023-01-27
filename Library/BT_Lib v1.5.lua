@@ -1417,7 +1417,7 @@ function Library:CreateWindow(title, gameName)
 						TextBox.PlaceholderText = Text;
 						TextBox.Text = Text;
 						Textbox.Value = TextBox.Text;
-						pcall(callback(Textbox.Value))
+						pcall(callback, Textbox.Value)
 					end;
 					
 					Options[Idx] = Textbox
@@ -1937,7 +1937,7 @@ function Library:CreateWindow(title, gameName)
 					function Slider:SetValue(Str)
 						Slider.Value = Str;
 						togName.Text = slidInf.." - "..Slider.Value
-						pcall(callback(Slider.Value))
+						pcall(callback, Slider.Value)
 					end;
 					Options[Idx] = Slider
                 end
@@ -2240,9 +2240,8 @@ function Library:CreateWindow(title, gameName)
 					
 					function Dropdown:SetValue(newText)
 						Dropdown.Value = newText;
-						dropOpen.Text = newText;
 						itemTextbox.Text = dropname.." - "..newText
-						pcall(callback(Dropdown.Value))
+						pcall(callback, Dropdown.Value)
 					end
 
 					Options[Idx] = Dropdown
@@ -2349,11 +2348,7 @@ function Library:CreateWindow(title, gameName)
                     return DropFunction
                 end
 
-                function Elements:addKeybind(Idx, keytext, keyinf, first, callback)
-					local Keybind = {
-						Value = first;
-						Type = 'Keybind';
-					};
+                function Elements:addKeybind(keytext, keyinf, first, callback)
                     keytext = keytext or "KeybindText"
                     keyinf = keyinf or "KebindInfo"
                     callback = callback or function() end
@@ -2554,14 +2549,6 @@ function Library:CreateWindow(title, gameName)
     
                         end
                     end)()
-					
-					function Keybind:SetValue(Data)
-						local Key = Data
-						togName_2.Text = Key;
-						Keybind.Value = Key;
-					end;
-					
-					Options[Idx] = Keybind
 					
                 end
 
