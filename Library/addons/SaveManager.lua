@@ -59,7 +59,7 @@ local SaveManager = {} do
 		},
 		Keybind = {
 			Save = function(idx, object)
-				return { type = 'Keybind', idx = idx, mode = object.Mode, key = object.Value }
+				return { type = 'Keybind', idx = idx, key = object.Value }
 			end,
 			Load = function(idx, data)
 				if Options[idx] then 
