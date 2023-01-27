@@ -1417,7 +1417,7 @@ function Library:CreateWindow(title, gameName)
 						TextBox.PlaceholderText = Text;
 						TextBox.Text = Text;
 						Textbox.Value = TextBox.Text;
-						callback(Textbox.Value)
+						pcall(callback)
 					end;
 					
 					Options[Idx] = Textbox;
@@ -1634,7 +1634,7 @@ function Library:CreateWindow(title, gameName)
                         Bool = Bool or toggle
                         if Bool then
                             toggled = true
-			    Toggle.Value = toggled;
+							Toggle.Value = toggled;
                             img.ImageRectOffset = Vector2.new(4, 836)
                             pcall(callback, toggled)
                         else
@@ -1937,7 +1937,7 @@ function Library:CreateWindow(title, gameName)
 					function Slider:SetValue(Str)
 						Slider.Value = Str;
 						togName.Text = slidInf.." - "..Slider.Value
-						callback(Slider.Value)
+						pcall(callback)
 					end;
 					Options[Idx] = Slider;
                 end
@@ -2242,7 +2242,7 @@ function Library:CreateWindow(title, gameName)
 						Dropdown.Value = newText;
 						dropOpen.Text = newText;
 						itemTextbox.Text = dropname.." - "..newText
-						pcall(Dropdown.Value)
+						pcall(callback)
 					end
 
 					Options[Idx] = Dropdown;
@@ -2986,13 +2986,9 @@ function Library:CreateWindow(title, gameName)
                     setcolor({h,s,v})
                 end
                 
-                function Elements:addLog(Idx, textname, textlog)
+                function Elements:addParagraph(Idx, pTitle, pText)
                     local logcatfunc = {}
-					local textname = textname or "• Log •"
-					local Config = {
-						Value = textlog;
-						Type = 'Config';
-					};
+					local pTitle = pTitle or "• Paragraph •"
                     local Title = Instance.new("TextLabel")
                     local titleCorner = Instance.new("UICorner")
                     local Frame = Instance.new("ScrollingFrame")
@@ -3005,7 +3001,7 @@ function Library:CreateWindow(title, gameName)
                     Title.BorderSizePixel = 0
                     Title.Size = UDim2.new(1, 0, 0, 15)
                     Title.Font = Enum.Font.SourceSansBold
-                    Title.Text = textname
+                    Title.Text = pTitle
                     Title.TextColor3 = Theme.TextColor
                     Title.TextSize = 14.000
                     Title.TextXAlignment = Enum.TextXAlignment.Center
@@ -3035,15 +3031,15 @@ function Library:CreateWindow(title, gameName)
                     TextLabel.Font = Enum.Font.Code
                     TextLabel.TextColor3 = Theme.TextColor
                     TextLabel.TextSize = 12.000
-                    TextLabel.Text = table.concat(Config.Value, "\n")
+                    TextLabel.Text = pText
 					TextLabel.TextScaled = false
 					TextLabel.TextWrapped = true
                     TextLabel.TextXAlignment = Enum.TextXAlignment.Left
                     TextLabel.TextYAlignment = Enum.TextYAlignment.Top
 					
 					TextLabel:GetPropertyChangedSignal("Text"):Connect(function()
-					Frame.CanvasSize = UDim2.new(0, 0, 0, string.len(TextLabel.Text))
-					TextLabel.Size = UDim2.new(1, -10, 0, string.len(TextLabel.Text))
+						Frame.CanvasSize = UDim2.new(0, 0, 0, string.len(TextLabel.Text))
+						TextLabel.Size = UDim2.new(1, -10, 0, string.len(TextLabel.Text))
 					end)
                     
                     coroutine.wrap(function()
@@ -3056,22 +3052,12 @@ function Library:CreateWindow(title, gameName)
                     
 					updateSectionFrame()
 					UpdateSize()
-					
-					function Config:SetValue(newLog)
-						if not newLog then return end
-						Config.Value = newLog
-						if TextLabel.Text ~= table.concat(Config.Value, "\n") then
-							TextLabel.Text = table.concat(Config.Value, "\n")
-						end
-                    end
 							
-					function logcatfunc:Refresh(newLog)
-						if TextLabel.Text ~= table.concat(newLog, "\n") then
-							TextLabel.Text = table.concat(newLog, "\n")
-							Config.Value = newLog
+					function logcatfunc:Refresh(nText)
+						if TextLabel.Text ~= nText then
+							TextLabel.Text = nText
 						end
                     end
-					Options[Idx] = Config;
                     return logcatfunc
                 end
 
