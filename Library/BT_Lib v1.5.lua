@@ -3008,8 +3008,6 @@ function Library:CreateWindow(title, gameName)
 						setcolor({H,S,V})
 					end;	
 					
-					Colorpicker:SetHSVFromRGB(Colorpicker.Value);
-					
 					function Colorpicker:SetValue(HSV)
 						local Color = Color3.fromHSV(HSV[1], HSV[2], HSV[3]);
 
