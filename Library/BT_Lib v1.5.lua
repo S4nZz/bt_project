@@ -1630,16 +1630,16 @@ function Library:CreateWindow(title, gameName)
                         end
                     end
 					
-					function Toggle:SetValue(Bool)
+			function Toggle:SetValue(Bool)
                         Bool = Bool or toggle
                         if Bool then
                             toggled = true
-							Toggle.Value = toggled;
+			    Toggle.Value = toggled;
                             img.ImageRectOffset = Vector2.new(4, 836)
                             pcall(callback, toggled)
                         else
                             toggled = false
-							Toggle.Value = toggled;
+			    Toggle.Value = toggled;
                             img.ImageRectOffset = Vector2.new(940, 784)
                             pcall(callback, toggled)
                         end
@@ -2237,16 +2237,17 @@ function Library:CreateWindow(title, gameName)
                             end
                         end)()
                     end
-					
-			function Dropdown:SetValue(Val)
-				if (not Val) then
-					Dropdown.Value = nil;
-					dropOpen.Text = "";
-				else
-					Dropdown.Value = Val;
-					dropOpen.Text = Val;
-				end;
-			end;
+			function Dropdown:SetValue(Value)
+                        Value = Value or default
+                        if Value then
+			    Dropdown.Value = Value;
+		            dropOpen.Text = Value;
+                            pcall(callback)
+                        else
+			    Dropdown.Value = nil;
+			    dropOpen.Text = "";
+                            pcall(callback)
+                        end		
 
 			Options[Idx] = Dropdown;
 					
