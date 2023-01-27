@@ -53,7 +53,7 @@ local SaveManager = {} do
 			end,
 			Load = function(idx, data)
 				if Options[idx] then 
-					Options[idx]:SetValueRGB(Color3.fromHex(data.value))
+					Options[idx]:ChangeColor(idx, Color3.fromHex(data.value))
 				end
 			end,
 		},
