@@ -2243,11 +2243,10 @@ function Library:CreateWindow(title, gameName)
 						if Value then
 							Dropdown.Value = Value;
 							dropOpen.Text = Value;
-							pcall(callback)
+							pcall(Dropdown.Value)
 						else
 							Dropdown.Value = nil;
 							dropOpen.Text = "";
-							pcall(callback)
 						end		
 					end
 
