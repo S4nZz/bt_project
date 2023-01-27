@@ -48,7 +48,7 @@ Element:addButton("Button", "Info", function()
 end)
 
 -- Make Toggle --
-Element:addToggle("Toggle1", "Toggle Title", "Info", Default, function(Value)
+Element:addToggle("Toggle1", "Toggle Title", "Info", false, function(Value)
     print(Value)
 end)
 
@@ -82,18 +82,33 @@ end)
 Element:addLabel("Text Label")
 
 -- Make Log --
-local Log = Element:addLog("Log1", "Log Title", TempTable)
-Log:Refresh(TempTable)
+local Paragraph = Element:addParagraph("Paragraph1", "Title", table.concat(TempTable, "\n"))
+Paragraph:Refresh(table.concat(TempTable, "\n"))
 	
 
 -- Refresh Log --
-Element:addButton("Refresh Log", "info", function() 
-  Log:Refresh(newTable)
+Element:addButton("Refresh Paragraph", "Refresh Paragraph", function() 
+  Paragraph:Refresh(table.concat(newTable, "\n"))
 end)
 
 -- Make Notification --
 Element:addButton("Notification", "Info", function()
     Library:Notification("Title", "Text Description")
+end)
+
+-- Make Corner Notify --
+Element:addButton("Notify", "Info", function()
+    Library:Notify("Title", "Text Description")
+end)
+
+-- Make Corner Notify --
+Element:addButton("Destroy UI", "Info", function()
+    Library:DestroyUI()
+end)
+
+-- Make Keybind --
+Element:addKeybind("Keybind", "Info", Enum.KeyCode.End, function()
+    print("Key Pressed")
 end)
 
 -- Add Themes --
