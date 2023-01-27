@@ -2565,11 +2565,7 @@ function Library:CreateWindow(title, gameName)
 					
                 end
 
-                function Elements:addColor(Idx, colText, colInf, defcolor, callback)
-					local Colorpicker = {
-						Value = defcolor;
-						Type = 'Colorpicker';
-					}
+                function Elements:addColor(colText, colInf, defcolor, callback)
                     colText = colText or "ColorPicker"
                     callback = callback or function() end
                     defcolor = defcolor or Color3.fromRGB(1,1,1)
@@ -3001,24 +2997,6 @@ function Library:CreateWindow(title, gameName)
                         end
                     end)
                     setcolor({h,s,v})
-					
-					function Colorpicker:SetHSVFromRGB(Color)
-						local H, S, V = Color3.toHSV(Color);
-
-						setcolor({H,S,V})
-					end;	
-					
-					function Colorpicker:SetValue(HSV)
-						local Color = Color3.fromHSV(HSV[1], HSV[2], HSV[3]);
-
-						Colorpicker:SetHSVFromRGB(Color);
-					end;
-
-					function Colorpicker:SetValueRGB(Color)
-						Colorpicker:SetHSVFromRGB(Color);
-					end;					
-					
-					Options[Idx] = Colorpicker
                 end
                 
                 function Elements:addParagraph(Idx, pTitle, pTable)
