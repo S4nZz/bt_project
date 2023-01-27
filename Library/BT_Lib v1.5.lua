@@ -2243,7 +2243,6 @@ function Library:CreateWindow(title, gameName)
 						dropOpen.Text = newText;
 						itemTextbox.Text = dropname.." - "..newText
 						pcall(Dropdown.Value)
-						end		
 					end
 
 					Options[Idx] = Dropdown;
