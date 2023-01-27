@@ -47,9 +47,9 @@ local SaveManager = {} do
 				end
 			end,
 		},
-		Config = {
+		Paragraph = {
 			Save = function(idx, object)
-				return { type = 'Config', idx = idx, value = object.Value }
+				return { type = 'Paragraph', idx = idx, value = object.Value }
 			end,
 			Load = function(idx, data)
 				if Options[idx] then 
