@@ -47,23 +47,13 @@ local SaveManager = {} do
 				end
 			end,
 		},
-		Colorpicker = {
+		Config = {
 			Save = function(idx, object)
-				return { type = 'Colorpicker', idx = idx, value = object.Value:ToHex() }
+				return { type = 'Config', idx = idx, value = object.Value }
 			end,
 			Load = function(idx, data)
 				if Options[idx] then 
-					Options[idx]:SetValueRGB(Color3.fromHex(data.value))
-				end
-			end,
-		},
-		Keybind = {
-			Save = function(idx, object)
-				return { type = 'Keybind', idx = idx, key = object.Value }
-			end,
-			Load = function(idx, data)
-				if Options[idx] then 
-					Options[idx]:SetValue(data.key)
+					Options[idx]:SetValue(data.value)
 				end
 			end,
 		}
