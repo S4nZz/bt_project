@@ -2238,14 +2238,11 @@ function Library:CreateWindow(title, gameName)
                         end)()
                     end
 					
-					function Dropdown:SetValue(Value)
-						if Value then
-							Dropdown.Value = Value;
-							dropOpen.Text = Value;
-							pcall(Dropdown.Value)
-						else
-							Dropdown.Value = default or "";
-							dropOpen.Text = default or "";
+					function Dropdown:SetValue(newText)
+						Dropdown.Value = newText;
+						dropOpen.Text = newText;
+						itemTextbox.Text = dropname.." - "..newText
+						pcall(Dropdown.Value)
 						end		
 					end
 
@@ -2294,7 +2291,7 @@ function Library:CreateWindow(title, gameName)
                                 if not focusing then
                                     opened = false
                                     callback(v)
-									Dropdown.Value = v
+				    Dropdown.Value = v
                                     itemTextbox.Text = dropname.." - "..v
                                     dropFrame:TweenSize(UDim2.new(1, 0, 0, 25), 'InOut', 'Linear', 0.08)
                                     wait(0.1)
