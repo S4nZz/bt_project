@@ -2237,20 +2237,21 @@ function Library:CreateWindow(title, gameName)
                             end
                         end)()
                     end
-			function Dropdown:SetValue(Value)
-				Value = Value or default
-				if Value then
-				    Dropdown.Value = Value;
-				    dropOpen.Text = Value;
-				    pcall(callback)
-				else
-				    Dropdown.Value = nil;
-				    dropOpen.Text = "";
-				    pcall(callback)
-				end
-			end
+					
+					function Dropdown:SetValue(Value)
+						Value = Value or default
+						if Value then
+							Dropdown.Value = Value;
+							dropOpen.Text = Value;
+							pcall(callback)
+						else
+							Dropdown.Value = nil;
+							dropOpen.Text = "";
+							pcall(callback)
+						end		
+					end
 
-			Options[Idx] = Dropdown;
+					Options[Idx] = Dropdown;
 					
                     function DropFunction:Refresh(newList)
                         newList = newList or {}
