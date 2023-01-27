@@ -2239,14 +2239,13 @@ function Library:CreateWindow(title, gameName)
                     end
 					
 					function Dropdown:SetValue(Value)
-						Value = Value or default
 						if Value then
 							Dropdown.Value = Value;
 							dropOpen.Text = Value;
 							pcall(Dropdown.Value)
 						else
-							Dropdown.Value = nil;
-							dropOpen.Text = "";
+							Dropdown.Value = default or "";
+							dropOpen.Text = default or "";
 						end		
 					end
 
