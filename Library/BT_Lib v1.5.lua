@@ -2566,7 +2566,7 @@ function Library:CreateWindow(title, gameName)
                 end
 
                 function Elements:addColor(Idx, colText, colInf, defcolor, callback)
-					local ColorPicker = {
+					local Colorpicker = {
 						Value = defcolor;
 						Type = 'Colorpicker';
 					}
