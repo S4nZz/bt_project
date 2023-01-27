@@ -1417,17 +1417,17 @@ function Library:CreateWindow(title, gameName)
 						TextBox.PlaceholderText = Text;
 						TextBox.Text = Text;
 						Textbox.Value = TextBox.Text;
-						pcall(callback)
+						pcall(callback(Textbox.Value))
 					end;
 					
-					Options[Idx] = Textbox;
+					Options[Idx] = Textbox
                 end
 
                 function Elements:addToggle(Idx, tname, nTip, default, callback)
-		    local Toggle = {
-			Value = default or false;
-			Type = 'Toggle';
-		    };
+					local Toggle = {
+						Value = default or false;
+						Type = 'Toggle';
+					};
                     local TogFunction = {}
                     tname = tname or "Toggle"
                     nTip = nTip or "Prints Current Toggle State"
@@ -1937,20 +1937,20 @@ function Library:CreateWindow(title, gameName)
 					function Slider:SetValue(Str)
 						Slider.Value = Str;
 						togName.Text = slidInf.." - "..Slider.Value
-						pcall(callback)
+						pcall(callback(Slider.Value))
 					end;
-					Options[Idx] = Slider;
+					Options[Idx] = Slider
                 end
 
                 function Elements:addDropdown(Idx, dropname, dropinf, default, list, callback)
-		    local Dropdown = {
-			Value = default;
-			Values = list;
-			Type = 'Dropdown';
-		    };
+					local Dropdown = {
+						Value = default;
+						Values = list;
+						Type = 'Dropdown';
+					};
                     local DropFunction = {}
                     dropname = dropname or "Dropdown"
-		    default = default or "Select"
+					default = default or "Select"
                     list = list or {}
                     dropinf = dropinf or "Dropdown info"
                     callback = callback or function() end   
@@ -2192,7 +2192,7 @@ function Library:CreateWindow(title, gameName)
                             if not focusing then
                                 opened = false
                                 callback(v)
-				Dropdown.Value = v
+								Dropdown.Value = v
                                 itemTextbox.Text = dropname.." - "..v
                                 dropFrame:TweenSize(UDim2.new(1, 0, 0, 25), 'InOut', 'Linear', 0.08)
                                 wait(0.1)
@@ -2242,10 +2242,10 @@ function Library:CreateWindow(title, gameName)
 						Dropdown.Value = newText;
 						dropOpen.Text = newText;
 						itemTextbox.Text = dropname.." - "..newText
-						pcall(callback)
+						pcall(callback(Dropdown.Value))
 					end
 
-					Options[Idx] = Dropdown;
+					Options[Idx] = Dropdown
 					
                     function DropFunction:Refresh(newList)
                         newList = newList or {}
@@ -2349,7 +2349,11 @@ function Library:CreateWindow(title, gameName)
                     return DropFunction
                 end
 
-                function Elements:addKeybind(keytext, keyinf, first, callback)
+                function Elements:addKeybind(Idx, keytext, keyinf, first, callback)
+					local Keybind = {
+						Value = first;
+						Type = 'Keybind';
+					};
                     keytext = keytext or "KeybindText"
                     keyinf = keyinf or "KebindInfo"
                     callback = callback or function() end
@@ -2550,9 +2554,22 @@ function Library:CreateWindow(title, gameName)
     
                         end
                     end)()
+					
+					function Keybind:SetValue(Data)
+						local Key = Data
+						togName_2.Text = Key;
+						Keybind.Value = Key;
+					end;
+					
+					Options[Idx] = Keybind
+					
                 end
 
-                function Elements:addColor(colText, colInf, defcolor, callback)
+                function Elements:addColor(Idx, colText, colInf, defcolor, callback)
+					local ColorPicker = {
+						Value = defcolor;
+						Type = 'Colorpicker';
+					}
                     colText = colText or "ColorPicker"
                     callback = callback or function() end
                     defcolor = defcolor or Color3.fromRGB(1,1,1)
@@ -2984,6 +3001,26 @@ function Library:CreateWindow(title, gameName)
                         end
                     end)
                     setcolor({h,s,v})
+					
+					function Colorpicker:SetHSVFromRGB(Color)
+						local H, S, V = Color3.toHSV(Color);
+
+						setcolor({H,S,V})
+					end;	
+					
+					Colorpicker:SetHSVFromRGB(Colorpicker.Value);
+					
+					function Colorpicker:SetValue(HSV)
+						local Color = Color3.fromHSV(HSV[1], HSV[2], HSV[3]);
+
+						Colorpicker:SetHSVFromRGB(Color);
+					end;
+
+					function Colorpicker:SetValueRGB(Color)
+						Colorpicker:SetHSVFromRGB(Color);
+					end;					
+					
+					Options[Idx] = Colorpicker
                 end
                 
                 function Elements:addParagraph(Idx, pTitle, pText)
