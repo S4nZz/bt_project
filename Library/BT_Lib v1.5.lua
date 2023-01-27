@@ -1424,10 +1424,10 @@ function Library:CreateWindow(title, gameName)
                 end
 
                 function Elements:addToggle(Idx, tname, nTip, default, callback)
-					local Toggle = {
-						Value = default or false;
-						Type = 'Toggle';
-					};
+		    local Toggle = {
+			Value = default or false;
+			Type = 'Toggle';
+		    };
                     local TogFunction = {}
                     tname = tname or "Toggle"
                     nTip = nTip or "Prints Current Toggle State"
@@ -1943,14 +1943,14 @@ function Library:CreateWindow(title, gameName)
                 end
 
                 function Elements:addDropdown(Idx, dropname, dropinf, default, list, callback)
-					local Dropdown = {
-						Value = default;
-						Values = list;
-						Type = 'Dropdown';
-					};
+		    local Dropdown = {
+			Value = default;
+			Values = list;
+			Type = 'Dropdown';
+		    };
                     local DropFunction = {}
                     dropname = dropname or "Dropdown"
-		    default = Dropdown.Value or "Select"
+		    default = default or "Select"
                     list = list or {}
                     dropinf = dropinf or "Dropdown info"
                     callback = callback or function() end   
@@ -2240,12 +2240,11 @@ function Library:CreateWindow(title, gameName)
 					
 			function Dropdown:SetValue(Val)
 				if (not Val) then
-					dropOpen.Text = "";
 					Dropdown.Value = nil;
+					dropOpen.Text = "";
 				elseif table.find(Dropdown.Values, Val) then
-					dropOpen.Text = dropname.." - "..Val
 					Dropdown.Value = Val;
-					callback(Dropdown.Value)
+					dropOpen.Text = Val;
 				end;
 			end;
 
