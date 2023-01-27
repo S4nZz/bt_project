@@ -63,7 +63,7 @@ local SaveManager = {} do
 			end,
 			Load = function(idx, data)
 				if Options[idx] then 
-					Options[idx]:SetValue({ data.key, data.mode })
+					Options[idx]:SetValue(data.key)
 				end
 			end,
 		}
