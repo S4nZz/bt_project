@@ -3021,9 +3021,13 @@ function Library:CreateWindow(title, gameName)
 					Options[Idx] = Colorpicker
                 end
                 
-                function Elements:addParagraph(Idx, pTitle, pText)
+                function Elements:addParagraph(Idx, pTitle, pTable)
+		    local Paragraph = {
+			Value = pTable,
+			Type = "Paragraph"
+		    }
                     local logcatfunc = {}
-					local pTitle = pTitle or "• Paragraph •"
+		    local pTitle = pTitle or "• Paragraph •"
                     local Title = Instance.new("TextLabel")
                     local titleCorner = Instance.new("UICorner")
                     local Frame = Instance.new("ScrollingFrame")
@@ -3066,7 +3070,7 @@ function Library:CreateWindow(title, gameName)
                     TextLabel.Font = Enum.Font.Code
                     TextLabel.TextColor3 = Theme.TextColor
                     TextLabel.TextSize = 12.000
-                    TextLabel.Text = pText
+                    TextLabel.Text = table.concat(pTable, "\n")
 					TextLabel.TextScaled = false
 					TextLabel.TextWrapped = true
                     TextLabel.TextXAlignment = Enum.TextXAlignment.Left
@@ -3085,14 +3089,21 @@ function Library:CreateWindow(title, gameName)
                         TextLabel.TextColor3 = Theme.TextColor
                     end)()
                     
-					updateSectionFrame()
-					UpdateSize()
+			updateSectionFrame()
+			UpdateSize()
 							
-					function logcatfunc:Refresh(nText)
-						if TextLabel.Text ~= nText then
-							TextLabel.Text = nText
-						end
+		    function logcatfunc:Refresh(nTable)
+			if TextLabel.Text ~= table.concat(nTable, "\n") then
+				TextLabel.Text = table.concat(nTable, "\n")
+			end
                     end
+					
+		    function Paragraph:SetValue(nTable)
+			if TextLabel.Text ~= table.concat(nTable, "\n") then
+				TextLabel.Text = table.concat(nTable, "\n")
+			end
+                    end
+		    Options[Idx] = Paragraph;
                     return logcatfunc
                 end
 
