@@ -2987,7 +2987,7 @@ function Library:CreateWindow(title, gameName)
                 end
                 
                 function Elements:addParagraph(Idx, pTitle, pTable)
-		    local CreateParagraph = {
+		    local Paragraph = {
 			Value = pTable,
 			Type = "Paragraph"
 		    }
@@ -3063,12 +3063,14 @@ function Library:CreateWindow(title, gameName)
 			end
                     end
 					
-		    function CreateParagraph:SetValue(nTable)
+		    function Paragraph:SetValue(nTable)
 			if TextLabel.Text ~= table.concat(nTable, "\n") then
 				TextLabel.Text = table.concat(nTable, "\n")
 			end
                     end
-		    Options[Idx] = CreateParagraph;
+					
+		    Options[Idx] = Paragraph;
+					
                     return logcatfunc
                 end
 
