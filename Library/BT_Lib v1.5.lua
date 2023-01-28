@@ -3063,7 +3063,7 @@ function Library:CreateWindow(title, gameName)
 			end
                     end
 					
-		    function Paragraph:SetValue(nTable)
+		    function CreateParagraph:SetValue(nTable)
 			if TextLabel.Text ~= table.concat(nTable, "\n") then
 				TextLabel.Text = table.concat(nTable, "\n")
 			end
