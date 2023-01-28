@@ -24,23 +24,21 @@ for i=1,100 do
   table.insert(TempTable, i..". Text Entry")
 end
 
-
-
 for i=1,100 do
   table.insert(newTable, i..". New Text Entry")
 end
 
--- Make Windows --
-local Windows = Library:CreateWindow("Hub", "Game")
+-- Make Window --
+local Window = Library:CreateWindow("ScriptTitle", "Game")
 
 -- Make Tabs --
-local Tabs = Windows:addTab("Tabs", img)
+local Tabs = Window:addTab("Tabs", img)
 
 -- Make Section --
 local Section = Tabs:addSection("Section")
 
 -- Make Element --
-local Element = Section:newSection("Element", false)
+local Element = Section:newSection("Element", false) -- true, hide's label title of the section.
 
 -- Make Button --
 Element:addButton("Button", "Info", function()
@@ -83,12 +81,12 @@ Element:addLabel("Text Label")
 
 -- Make Log --
 local Paragraph = Element:addParagraph("Paragraph1", "Title", TempTable)
-Paragraph:Refresh(TempTable)
+Options["Paragraph1"]:SetValue(TempTable)
 	
 
 -- Refresh Log --
 Element:addButton("Refresh Paragraph", "Refresh Paragraph", function() 
-  Paragraph:Refresh(newTable)
+  Options["Paragraph1"]:SetValue(newTable)
 end)
 
 -- Make Notification --
@@ -110,6 +108,19 @@ end)
 Element:addKeybind("Keybind", "Info", Enum.KeyCode.End, function()
     print("Key Pressed")
 end)
+
+-- SaveManager Set Library --
+SaveManager:SetLibrary(Library)
+
+-- SaveManager Set Folder --
+SaveManager:SetFolder('BlackTrap/psx')
+
+-- SaveManager Add Tab/Config Section --
+SaveManager:BuildConfigSection(Tabs) 
+
+-- SaveManager AutoLoad Configuration --
+SaveManager:LoadAutoloadConfig()
+
 
 -- Themes Section--
 local ThemesList = {
@@ -225,15 +236,3 @@ for theme, color in pairs(themes) do
         Library:ChangeColor(theme, color3)
     end)
 end
-
--- SaveManager Set Library --
-SaveManager:SetLibrary(Library)
-
--- SaveManager Set Folder --
-SaveManager:SetFolder('BlackTrap/psx')
-
--- SaveManager Add Tab/Config Section --
-SaveManager:BuildConfigSection(Tabs) 
-
--- SaveManager AutoLoad Configuration --
-SaveManager:LoadAutoloadConfig()
