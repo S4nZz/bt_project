@@ -47,7 +47,7 @@ local SaveManager = {} do
 				end
 			end,
 		},
-		Paragraph = {
+		CreateParagraph = {
 			Save = function(idx, object)
 				return { type = 'Paragraph', idx = idx, value = object.Value }
 			end,
