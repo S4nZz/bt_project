@@ -111,7 +111,20 @@ Element:addKeybind("Keybind", "Info", Enum.KeyCode.End, function()
     print("Key Pressed")
 end)
 
--- Add Themes --
+-- Themes Section--
+local ThemesList = {
+	"Default", 
+	"DarkTheme", 
+	"LightTheme", 
+	"BloodTheme", 
+	"GrapeTheme", 
+	"Ocean", 
+	"Midnight", 
+	"Sentinel", 
+	"Synapse", 
+	"Serpent"
+}
+
 local themes = {
     AccentColor = Color3.fromRGB(45, 45, 45),
     Background = Color3.fromRGB(30, 30, 30),
@@ -120,8 +133,95 @@ local themes = {
     ElementColor = Color3.fromRGB(12, 12, 12)
 }
 
+local themeStyles = {
+    Default = {
+        AccentColor = Color3.fromRGB(45, 45, 45),
+        Background = Color3.fromRGB(30, 30, 30),
+        TextColor = Color3.fromRGB(180, 180, 180),
+        ImageColor = Color3.fromRGB(255, 255, 255),
+        ElementColor = Color3.fromRGB(12, 12, 12)
+    },
+    DarkTheme = {
+        AccentColor = Color3.fromRGB(64, 64, 64),
+        Background = Color3.fromRGB(0, 0, 0),
+        TextColor = Color3.fromRGB(180, 180, 180),
+        ImageColor = Color3.fromRGB(255, 255, 255),
+        ElementColor = Color3.fromRGB(20, 20, 20)
+    },
+    LightTheme = {
+        AccentColor = Color3.fromRGB(150, 150, 150),
+        Background = Color3.fromRGB(255, 255, 255),
+        TextColor = Color3.fromRGB(0, 0, 0),
+        ImageColor = Color3.fromRGB(0, 0, 0),
+        ElementColor = Color3.fromRGB(224, 224, 224)
+    },
+    BloodTheme = {
+        AccentColor = Color3.fromRGB(227, 27, 27),
+        Background = Color3.fromRGB(150, 10, 10),
+        TextColor = Color3.fromRGB(255, 255, 255),
+        ImageColor = Color3.fromRGB(255,255,255),
+        ElementColor = Color3.fromRGB(220, 20, 20)
+    },
+    GrapeTheme = {
+        AccentColor = Color3.fromRGB(166, 71, 214),
+        Background = Color3.fromRGB(120, 50, 180),
+        TextColor = Color3.fromRGB(255, 255, 255),
+        ImageColor = Color3.fromRGB(255, 255, 255),
+        ElementColor = Color3.fromRGB(140, 58, 180)
+    },
+    Ocean = {
+        AccentColor = Color3.fromRGB(86, 76, 251),
+        Background = Color3.fromRGB(26, 32, 108),
+        ImageColor = Color3.fromRGB(200, 200, 200),
+        TextColor = Color3.fromRGB(200, 200, 200),
+        ElementColor = Color3.fromRGB(38, 45, 150)
+    },
+    Midnight = {
+        AccentColor = Color3.fromRGB(26, 189, 158),
+        Background = Color3.fromRGB(44, 62, 82),
+        ImageColor = Color3.fromRGB(255, 255, 255),
+        TextColor = Color3.fromRGB(255, 255, 255),
+        ElementColor = Color3.fromRGB(52, 74, 95)
+    },
+    Sentinel = {
+        AccentColor = Color3.fromRGB(230, 35, 69),
+        Background = Color3.fromRGB(32, 32, 32),
+        ImageColor = Color3.fromRGB(119, 209, 138),
+        TextColor = Color3.fromRGB(119, 209, 138),
+        ElementColor = Color3.fromRGB(12, 12, 12)
+    },
+    Synapse = {
+        AccentColor = Color3.fromRGB(46, 48, 43),
+        Background = Color3.fromRGB(13, 15, 12),
+        ImageColor = Color3.fromRGB(152, 99, 53),
+        TextColor = Color3.fromRGB(152, 99, 53),
+        ElementColor = Color3.fromRGB(24, 24, 24)
+    },
+    Serpent = {
+        AccentColor = Color3.fromRGB(0, 166, 58),
+        Background = Color3.fromRGB(31, 41, 43),
+        ImageColor = Color3.fromRGB(255, 255, 255),
+        TextColor = Color3.fromRGB(255, 255, 255),
+        ElementColor = Color3.fromRGB(22, 29, 31)
+    }
+}
+
+local ThemeSection = Tabs:addSection("Theme")
+local Themes = ThemeSection:newSection("Theme Settings", true)
+Themes:addDropdown("SelectedTheme", "Select Theme", "Select Theme to Auto Load", "", ThemesList, function(Value)
+	getgenv().Theme = Value
+	for i,v in pairs(themeStyles) do
+		if i == getgenv().Theme then
+			for theme,color in pairs(v) do
+				Library:ChangeColor(theme, color)
+			end
+		end
+	end
+	print("Selected Theme:", Value)
+end)
+
 for theme, color in pairs(themes) do
-    Element:addColor(theme, "Change your "..theme, color, function(color3)
+    Themes:addColor(theme, "Change your "..theme, color, function(color3)
         Library:ChangeColor(theme, color3)
     end)
 end
