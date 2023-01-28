@@ -247,7 +247,7 @@ function Library:CreateWindow(title, gameName)
     CoverBT.Position = UDim2.new(0.100220447, 0, 0, 150)
 
     openBT.Name = "openBT"
-    openBT.Parent = CoverBT
+    openBT.Parent = ScreenGui
     openBT.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     openBT.BackgroundTransparency = 1.000
     openBT.BorderSizePixel = 0
