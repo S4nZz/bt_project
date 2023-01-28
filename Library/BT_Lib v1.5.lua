@@ -203,6 +203,7 @@ function Library:CreateWindow(title, gameName)
     end
 
     local ScreenGui = Instance.new("ScreenGui")
+    local openBTFrame = Instance.new("Frame")	
     local openBT = Instance.new("ImageButton")
     local Main = Instance.new("ImageLabel")
     local mainCorner = Instance.new("UICorner")
