@@ -232,7 +232,7 @@ Themes:addDropdown("SelectedTheme", "Select Theme", "Select Theme to Auto Load",
 end)
 
 for theme, color in pairs(themes) do
-    Themes:addColor(theme, "Change your "..theme, color, function(color3)
+    Themes:addColor(theme, theme, "Change your "..theme, color, function(color3)
         Library:ChangeColor(theme, color3)
     end)
 end
