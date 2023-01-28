@@ -245,9 +245,15 @@ function Library:CreateWindow(title, gameName)
     CoverBT.BackgroundTransparency = 1.000
     CoverBT.Size = UDim2.new(0, 35, 0, 35)
     CoverBT.Position = UDim2.new(0.100220447, 0, 0, 150)
-
+	
+    openBTFrame.Name = "openBTFrame"
+    openBTFrame.Parent = ScreenGui
+    openBTFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    openBTFrame.BackgroundTransparency = 1.000
+    openBTFrame.Size = UDim2.new(0, 35, 0, 35)
+	
     openBT.Name = "openBT"
-    openBT.Parent = ScreenGui
+    openBT.Parent = openBTFrame
     openBT.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     openBT.BackgroundTransparency = 1.000
     openBT.BorderSizePixel = 0
@@ -255,7 +261,7 @@ function Library:CreateWindow(title, gameName)
     openBT.Image = "rbxassetid://11482100481"
     openBT.Position = UDim2.new(0, 1, 0, 1)
     --openBT.ImageColor3 = Color3.fromRGB(0, 0, 0)
-    Library:DraggingEnabled(openBT, ScreenGui)
+    Library:DraggingEnabled(openBTFrame, ScreenGui)
 	
     openBT.MouseLeave:Connect(function()
         Utility:TweenObject(openBT, {Size = UDim2.new(0, 35, 0, 35)}, 0.1)
