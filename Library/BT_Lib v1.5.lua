@@ -2554,13 +2554,13 @@ function Library:CreateWindow(title, gameName)
                 end
 
                 function Elements:addColor(Idx, colText, colInf, defcolor, callback)
-			local Theme = {
+			local ColorPicker = {
 				Value = defcolor;
-				Type = 'Theme';
+				Type = 'ColorPicker';
 			};
                     colText = colText or "ColorPicker"
                     callback = callback or function() end
-                    defcolor = Theme.Value or Color3.fromRGB(1,1,1)
+                    defcolor = ColorPicker.Value or Color3.fromRGB(1,1,1)
                     local h, s, v = Color3.toHSV(defcolor)
                     local ms = game.Players.LocalPlayer:GetMouse()
                     local colorOpened = false
@@ -2990,7 +2990,7 @@ function Library:CreateWindow(title, gameName)
                     end)
                     setcolor({h,s,v})
 					
-			    function Theme:SetValue(prope,color)
+			    function ColorPicker:SetValue(prope,color)
 				if prope == "Background" then
 				    Theme.Background = color
 				elseif prope == "AccentColor" then
@@ -3004,7 +3004,7 @@ function Library:CreateWindow(title, gameName)
 				end
 			    end
 
-			Options[Idx] = Theme;
+			Options[Idx] = ColorPicker;
                 end
                 
                 function Elements:addParagraph(Idx, pTitle, pTable)
