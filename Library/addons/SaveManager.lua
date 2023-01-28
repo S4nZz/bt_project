@@ -56,6 +56,16 @@ local SaveManager = {} do
 					Options[idx]:SetValue(data.value)
 				end
 			end,
+		},
+		Theme = {
+			Save = function(idx, object)
+				return { type = 'Theme', idx = idx, value = object.Value }
+			end,
+			Load = function(idx, data)
+				if Options[idx] then 
+					Options[idx]:SetValue(idx, data.value)
+				end
+			end,
 		}
 	}
 
