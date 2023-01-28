@@ -82,13 +82,13 @@ end)
 Element:addLabel("Text Label")
 
 -- Make Log --
-local Paragraph = Element:addParagraph("Paragraph1", "Title", table.concat(TempTable, "\n"))
-Paragraph:Refresh(table.concat(TempTable, "\n"))
+local Paragraph = Element:addParagraph("Paragraph1", "Title", TempTable)
+Paragraph:Refresh(TempTable)
 	
 
 -- Refresh Log --
 Element:addButton("Refresh Paragraph", "Refresh Paragraph", function() 
-  Paragraph:Refresh(table.concat(newTable, "\n"))
+  Paragraph:Refresh(newTable)
 end)
 
 -- Make Notification --
