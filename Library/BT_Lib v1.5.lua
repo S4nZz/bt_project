@@ -1943,14 +1943,14 @@ function Library:CreateWindow(title, gameName)
                 end
 
                 function Elements:addDropdown(Idx, dropname, dropinf, default, list, callback)
-					local Dropdown = {
-						Value = default;
-						Values = list;
-						Type = 'Dropdown';
-					};
+			local Dropdown = {
+				Value = default;
+				Values = list;
+				Type = 'Dropdown';
+			};
                     local DropFunction = {}
                     dropname = dropname or "Dropdown"
-					default = default or "Select"
+		    default = default or "Select"
                     list = list or {}
                     dropinf = dropinf or "Dropdown info"
                     callback = callback or function() end   
@@ -2238,13 +2238,11 @@ function Library:CreateWindow(title, gameName)
                         end)()
                     end
 					
-					function Dropdown:SetValue(newText)
-						Dropdown.Value = newText;
-						itemTextbox.Text = dropname.." - "..newText
-						pcall(callback, Dropdown.Value)
-					end
-
-					Options[Idx] = Dropdown
+		function Dropdown:SetValue(newText)
+			Dropdown.Value = newText;
+			itemTextbox.Text = dropname.." - "..newText
+			pcall(callback, Dropdown.Value)
+		end
 					
                     function DropFunction:Refresh(newList)
                         newList = newList or {}
@@ -2345,6 +2343,9 @@ function Library:CreateWindow(title, gameName)
                             UpdateSize()
                         end
                     end
+					
+		    Options[Idx] = Dropdown
+					
                     return DropFunction
                 end
 
@@ -2552,7 +2553,11 @@ function Library:CreateWindow(title, gameName)
 					
                 end
 
-                function Elements:addColor(colText, colInf, defcolor, callback)
+                function Elements:addColor(Idx, colText, colInf, defcolor, callback)
+			local Theme = {
+				Value = defcolor;
+				Type = 'Theme';
+			};
                     colText = colText or "ColorPicker"
                     callback = callback or function() end
                     defcolor = defcolor or Color3.fromRGB(1,1,1)
@@ -2984,6 +2989,22 @@ function Library:CreateWindow(title, gameName)
                         end
                     end)
                     setcolor({h,s,v})
+					
+			    function Theme:SetValue(prope,color)
+				if prope == "Background" then
+				    Theme.Background = color
+				elseif prope == "AccentColor" then
+				    Theme.AccentColor = color
+				elseif prope == "ImageColor" then
+				    Theme.ImageColor = color
+				elseif prope == "TextColor" then
+				    Theme.TextColor = color
+				elseif prope == "ElementColor" then
+				    Theme.ElementColor = color
+				end
+			    end
+
+			Options[Idx] = Theme;
                 end
                 
                 function Elements:addParagraph(Idx, pTitle, pTable)
