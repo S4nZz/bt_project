@@ -154,35 +154,8 @@ local themeStyles = {
         ElementColor = Color3.fromRGB(22, 29, 31)
     }
 }
-local oldTheme = ""
-
-local SettingsT = {
-}
-
-local Name = "BTConfig.JSON"
-
-pcall(function()
-
-if not pcall(function() readfile(Name) end) then
-writefile(Name, game:service'HttpService':JSONEncode(SettingsT))
-end
-
-Settings = game:service'HttpService':JSONEncode(readfile(Name))
-end)
 
 local LibName = tostring(math.random(1, 100))..tostring(math.random(1,50))..tostring(math.random(1, 100))
-
-function Library:ToggleUI()
-    if game.CoreGui[LibName] then
-	game.CoreGui[LibName].Enabled = not game.CoreGui[LibName].Enabled
-    end
-end
-
-function Library:DestroyUI()
-    if game.CoreGui[LibName] then
-        game.CoreGui[LibName]:Destroy()
-    end
-end
 
 function Library:CreateWindow(title, gameName)
     if Theme == "Default" then
@@ -521,6 +494,17 @@ function Library:CreateWindow(title, gameName)
             Theme.ElementColor = color
         end
     end
+	function Library:ToggleUI()
+	    if game.CoreGui[LibName] then
+		game.CoreGui[LibName].Enabled = not game.CoreGui[LibName].Enabled
+	    end
+	end
+
+	function Library:DestroyUI()
+	    if game.CoreGui[LibName] then
+		game.CoreGui[LibName]:Destroy()
+	    end
+	end	
 	
 	function Library:Notify(nTitle, nText)
 		game:GetService("StarterGui"):SetCore("SendNotification",{
@@ -1434,7 +1418,6 @@ function Library:CreateWindow(title, gameName)
                     callback = callback or function() end
                     local toggled = false
                     default = default or false
-                    table.insert(SettingsT, tname)
 
                     local toggleElement = Instance.new("TextButton")
                     local UICorner = Instance.new("UICorner")
