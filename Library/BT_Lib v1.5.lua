@@ -3035,7 +3035,7 @@ function Library:CreateWindow(title, gameName)
                     TextLabel.Font = Enum.Font.Code
                     TextLabel.TextColor3 = Theme.TextColor
                     TextLabel.TextSize = 12.000
-                    TextLabel.Text = table.concat(pTable, "\n")
+                    TextLabel.Text = table.concat(Paragraph.Value, "\n")
 					TextLabel.TextScaled = false
 					TextLabel.TextWrapped = true
                     TextLabel.TextXAlignment = Enum.TextXAlignment.Left
@@ -3066,6 +3066,7 @@ function Library:CreateWindow(title, gameName)
 		    function Paragraph:SetValue(nTable)
 			if TextLabel.Text ~= table.concat(nTable, "\n") then
 				TextLabel.Text = table.concat(nTable, "\n")
+				Paragraph.Value = nTable
 			end
                     end
 					
