@@ -57,9 +57,9 @@ local SaveManager = {} do
 				end
 			end,
 		},
-		Theme = {
+		ColorPicker = {
 			Save = function(idx, object)
-				return { type = 'Theme', idx = idx, value = object.Value }
+				return { type = 'ColorPicker', idx = idx, value = object.Value }
 			end,
 			Load = function(idx, data)
 				if Options[idx] then 
