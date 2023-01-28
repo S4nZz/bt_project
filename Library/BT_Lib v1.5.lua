@@ -3068,11 +3068,13 @@ function Library:CreateWindow(title, gameName)
 					end)
                     
                     coroutine.wrap(function()
-                        Title.BackgroundColor3 = Theme.AccentColor
-                        Title.TextColor3 = Theme.TextColor
-                        Frame.BackgroundColor3 = Theme.ElementColor
-                        Frame.ScrollBarImageColor3 = Theme.ImageColor
-                        TextLabel.TextColor3 = Theme.TextColor
+			while wait() do
+				Title.BackgroundColor3 = Theme.AccentColor
+				Title.TextColor3 = Theme.TextColor
+				Frame.BackgroundColor3 = Theme.ElementColor
+				Frame.ScrollBarImageColor3 = Theme.ImageColor
+				TextLabel.TextColor3 = Theme.TextColor
+			end
                     end)()
                     
 			updateSectionFrame()
