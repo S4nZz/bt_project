@@ -2560,7 +2560,7 @@ function Library:CreateWindow(title, gameName)
 			};
                     colText = colText or "ColorPicker"
                     callback = callback or function() end
-                    defcolor = defcolor or Color3.fromRGB(1,1,1)
+                    defcolor = Theme.Value or Color3.fromRGB(1,1,1)
                     local h, s, v = Color3.toHSV(defcolor)
                     local ms = game.Players.LocalPlayer:GetMouse()
                     local colorOpened = false
