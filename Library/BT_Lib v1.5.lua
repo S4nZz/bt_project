@@ -900,16 +900,6 @@ function Library:CreateWindow(title, gameName)
                     sectionTitle.BackgroundColor3 = Theme.ElementColor
                 end
             end)()
-		if default then
-			UpdateSize()
-			for i,v in next, pagesFolder:GetChildren() do
-			    if v.Name == "pageContainer" then
-				v.Visible = false
-			    end
-			end
-			pagesFolder.Visible = true
-			pageContainer.Visible = true
-		end
             
             function secItems:newSection(secName, hidden)
                 local sectionFunctions = {}
