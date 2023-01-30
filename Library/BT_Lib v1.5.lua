@@ -843,13 +843,6 @@ function Library:CreateWindow(title, gameName)
             
             sectionCorner.Parent = sectionTitle
             sectionCorner.CornerRadius = UDim.new(0, 4)
-			
-	    if default then
-	    	sectab = false
-		pageContainer.Visible = true
-                sectionTitle.BackgroundTransparency = 0
-                UpdateSize()
-	    end
             
             if sectab then
                 sectab = false
@@ -907,6 +900,16 @@ function Library:CreateWindow(title, gameName)
                     sectionTitle.BackgroundColor3 = Theme.ElementColor
                 end
             end)()
+		if default then
+			UpdateSize()
+			for i,v in next, pagesFolder:GetChildren() do
+			    if v.Name == "pageContainer" then
+				v.Visible = false
+			    end
+			end
+			pagesFolder.Visible = true
+			pageContainer.Visible = true
+		end
             
             function secItems:newSection(secName, hidden)
                 local sectionFunctions = {}
