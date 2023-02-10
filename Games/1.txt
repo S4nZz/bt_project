@@ -1,1 +1,4 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/S4nZz/bt_project/main/Games/HOOYJEA-obfuscated.lua"))()
+
+
+print('success')
