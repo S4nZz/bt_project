@@ -55,10 +55,10 @@ for i,v in pairs(Types) do
         local ptime = 0
         local last = tick()
         local now = last
-        local TICK_TIME = 0.5
+        local TICK_TIME = last
         while wait() do
-            if ptime > TICK_TIME then
-                while ptime > TICK_TIME do ptime = ptime - TICK_TIME end
+            if ptime >= TICK_TIME then
+                while ptime >= TICK_TIME do ptime = ptime - TICK_TIME end
                 local currentbal = get(v)
                 megatable[imaginaryi] = currentbal
                 local diffy = currentbal - (megatable[imaginaryi-120] or megatable[1])
