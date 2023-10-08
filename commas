@@ -1,0 +1,75 @@
+local Save = GameLibrary.Save.Get
+local Commas = GameLibrary.Functions.Commas
+local Types = {}
+local Menus = game:GetService("Players").LocalPlayer.PlayerGui.Main.Right
+
+for i,v in pairs(Menus:GetChildren()) do
+    if v.ClassName == "Frame" and v.Name ~= "Rank" and not string.find(v.Name, "2") then
+        table.insert(Types, v.Name)
+    end
+end
+
+function get(thistype)
+    if game.PlaceId == 10321372166 and string.find(string.lower(thistype), "coins") then
+        return Save().HardcoreCurrency[thistype]
+    else
+        return Save()[thistype]
+    end
+end
+
+local LayoutOrders = {
+    ['Diamonds'] = 99899998;
+    ["Coins"] = 99998998;
+    ["Fantasy Coins"] = 99998997;
+    ["Tech Coins"] = 99998996;
+    ["Rainbow Coins"] = 99998995;
+    --['Valentine Hearts'] = 99999;
+    ['Cartoon Coins'] = 99998994;
+}
+getgenv().MyTypes = {}
+for i,v in pairs(Menus:GetChildren()) do
+    if string.find(v.Name, "2") then
+        v:Destroy() 
+    end
+end
+
+for i,v in pairs(Types) do
+    if not Menus:FindFirstChild(v.."2") then
+        Menus:WaitForChild(v).LayoutOrder = LayoutOrders[v]
+        local tempmark = Menus:WaitForChild(v):Clone()
+        tempmark.Name = tostring(tempmark.Name .. "2")
+        tempmark.Size = UDim2.new(0, 170, 0, 30)
+        tempmark.Parent = Menus
+        tempmark.LayoutOrder = tempmark.LayoutOrder + 1
+        tempmark.BackgroundColor3 = Color3.fromRGB(210,210,210)
+        getgenv().MyTypes[v] = tempmark
+    end
+end
+
+spawn(function() Menus:WaitForChild("Diamonds2").Add.Visible = false end)
+for i,v in pairs(Types) do
+    spawn(function()
+        repeat wait() until getgenv().MyTypes[v]
+        local megatable = {}
+        local imaginaryi = 1
+        local ptime = 0
+        local last = tick()
+        local now = last
+        local TICK_TIME = 0.5
+        while true do
+            if ptime > TICK_TIME then
+                while ptime > TICK_TIME do ptime = ptime - TICK_TIME end
+                local currentbal = get(v)
+                megatable[imaginaryi] = currentbal
+                local diffy = currentbal - (megatable[imaginaryi-120] or megatable[1])
+                imaginaryi = imaginaryi + 1
+                getgenv().MyTypes[v].Amount.Text = tostring(Commas(diffy).." in 60s")
+                getgenv().MyTypes[v].Amount_odometerGUIFX.Text = tostring(Commas(diffy).." in 60s")
+            end
+            task.wait()
+            now = tick()
+            ptime = ptime + (now - last)
+            last = now
+        end
+    end) 
+end
