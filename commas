@@ -55,7 +55,7 @@ for i,v in pairs(Types) do
         local ptime = 0
         local last = tick()
         local now = last
-        local TICK_TIME = ptime
+        local TICK_TIME = 1
         while wait() do
             if ptime >= TICK_TIME then
                 while ptime >= TICK_TIME do ptime = ptime - TICK_TIME end
