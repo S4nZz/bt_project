@@ -56,7 +56,7 @@ for i,v in pairs(Types) do
         local last = tick()
         local now = last
         local TICK_TIME = 0.5
-        while true do
+        while wait() do
             if ptime > TICK_TIME then
                 while ptime > TICK_TIME do ptime = ptime - TICK_TIME end
                 local currentbal = get(v)
